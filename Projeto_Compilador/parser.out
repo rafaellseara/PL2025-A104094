@@ -1,0 +1,4065 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> Pascal_Prog
+Rule 1     Pascal_Prog -> PROGRAM identifier ; Var_Declaration Code
+Rule 2     Var_Declaration -> <empty>
+Rule 3     Var_Declaration -> VAR Var_Lines
+Rule 4     Var_Lines -> <empty>
+Rule 5     Var_Lines -> Var_Lines Var_Line
+Rule 6     Var_Lines -> Var_Line
+Rule 7     Var_Line -> Var_Names : Type ;
+Rule 8     Type -> INTEGER
+Rule 9     Type -> STRING
+Rule 10    Type -> BOOLEAN
+Rule 11    Type -> ARRAY [ number dotdot number ] OF Type
+Rule 12    Var_Names -> Var_Names , identifier
+Rule 13    Var_Names -> identifier
+Rule 14    Code -> BEGIN Lines_Of_Code END .
+Rule 15    Lines_Of_Code -> <empty>
+Rule 16    Lines_Of_Code -> Lines_Of_Code Program_Line
+Rule 17    Lines_Of_Code -> Program_Line
+Rule 18    Program_Line -> Write_Line ;
+Rule 19    Program_Line -> Write_Line_No_ln ;
+Rule 20    Program_Line -> Read_Line ;
+Rule 21    Program_Line -> If_Statement ;
+Rule 22    Program_Line -> Assignment ;
+Rule 23    Program_Line -> Read_Line_ln ;
+Rule 24    Program_Line -> Block ;
+Rule 25    Program_Line -> For_Statement ;
+Rule 26    Program_Line -> While_Statement ;
+Rule 27    Program_Line_No_Semi_Colon -> Write_Line
+Rule 28    Program_Line_No_Semi_Colon -> Write_Line_No_ln
+Rule 29    Program_Line_No_Semi_Colon -> Read_Line
+Rule 30    Program_Line_No_Semi_Colon -> If_Statement_Complete
+Rule 31    Program_Line_No_Semi_Colon -> If_Statement_Incomplete
+Rule 32    Program_Line_No_Semi_Colon -> Assignment
+Rule 33    Program_Line_No_Semi_Colon -> Read_Line_ln
+Rule 34    Program_Line_No_Semi_Colon -> Block
+Rule 35    Program_Line_No_Semi_Colon -> For_Statement
+Rule 36    Program_Line_No_Semi_Colon -> While_Statement
+Rule 37    Write_Line -> WRITELN ( Write_Args )
+Rule 38    Write_Line_No_ln -> WRITE ( Write_Args )
+Rule 39    Write_Args -> Write_Args , Write_Arg
+Rule 40    Write_Args -> Write_Arg
+Rule 41    Write_Arg -> argument
+Rule 42    Write_Arg -> identifier
+Rule 43    Read_Line -> READ ( identifier )
+Rule 44    Read_Line_ln -> READLN ( identifier )
+Rule 45    Read_Line -> READLN ( identifier [ Expression ] )
+Rule 46    Expression -> Expression + Expression
+Rule 47    Expression -> Expression - Expression
+Rule 48    Expression -> Expression * Expression
+Rule 49    Expression -> Expression / Expression
+Rule 50    Expression -> Expression > Expression
+Rule 51    Expression -> Expression < Expression
+Rule 52    Expression -> Expression = Expression
+Rule 53    Expression -> Expression lowerequal Expression
+Rule 54    Expression -> Expression greaterequal Expression
+Rule 55    Expression -> Expression DIV Expression
+Rule 56    Expression -> Expression MOD Expression
+Rule 57    Expression -> Expression AND Expression
+Rule 58    Expression -> Expression OR Expression
+Rule 59    Expression -> ( Expression )
+Rule 60    Expression -> identifier
+Rule 61    Expression -> identifier [ Expression ]
+Rule 62    Expression -> number
+Rule 63    Expression -> argument
+Rule 64    Expression -> TRUE
+Rule 65    Expression -> FALSE
+Rule 66    Expression -> NOT Expression
+Rule 67    Expression -> LENGTH ( identifier )
+Rule 68    Assignment -> identifier assign Expression
+Rule 69    Block -> BEGIN Lines_Of_Code END
+Rule 70    If_Statement -> If_Statement_Complete
+Rule 71    If_Statement -> If_Statement_Incomplete
+Rule 72    If_Statement_Complete -> IF Expression THEN Program_Line_No_Semi_Colon ELSE Program_Line_No_Semi_Colon
+Rule 73    If_Statement_Incomplete -> IF Expression THEN Program_Line_No_Semi_Colon
+Rule 74    For_Statement -> FOR identifier assign Expression TO Expression DO Program_Line_No_Semi_Colon
+Rule 75    For_Statement -> FOR identifier assign Expression DOWNTO Expression DO Program_Line_No_Semi_Colon
+Rule 76    While_Statement -> WHILE Expression DO Program_Line_No_Semi_Colon
+
+Terminals, with rules where they appear
+
+(                    : 37 38 43 44 45 59 67
+)                    : 37 38 43 44 45 59 67
+*                    : 48
++                    : 46
+,                    : 12 39
+-                    : 47
+.                    : 14
+/                    : 49
+:                    : 7
+;                    : 1 7 18 19 20 21 22 23 24 25 26
+<                    : 51
+=                    : 52
+>                    : 50
+AND                  : 57
+ARRAY                : 11
+BEGIN                : 14 69
+BOOLEAN              : 10
+DIV                  : 55
+DO                   : 74 75 76
+DOWNTO               : 75
+ELSE                 : 72
+END                  : 14 69
+FALSE                : 65
+FOR                  : 74 75
+IF                   : 72 73
+INTEGER              : 8
+LENGTH               : 67
+MOD                  : 56
+NOT                  : 66
+OF                   : 11
+OR                   : 58
+PROGRAM              : 1
+READ                 : 43
+READLN               : 44 45
+STRING               : 9
+THEN                 : 72 73
+TO                   : 74
+TRUE                 : 64
+VAR                  : 3
+WHILE                : 76
+WRITE                : 38
+WRITELN              : 37
+[                    : 11 45 61
+]                    : 11 45 61
+argument             : 41 63
+assign               : 68 74 75
+dotdot               : 11
+error                : 
+greaterequal         : 54
+identifier           : 1 12 13 42 43 44 45 60 61 67 68 74 75
+lowerequal           : 53
+number               : 11 11 62
+
+Nonterminals, with rules where they appear
+
+Assignment           : 22 32
+Block                : 24 34
+Code                 : 1
+Expression           : 45 46 46 47 47 48 48 49 49 50 50 51 51 52 52 53 53 54 54 55 55 56 56 57 57 58 58 59 61 66 68 72 73 74 74 75 75 76
+For_Statement        : 25 35
+If_Statement         : 21
+If_Statement_Complete : 30 70
+If_Statement_Incomplete : 31 71
+Lines_Of_Code        : 14 16 69
+Pascal_Prog          : 0
+Program_Line         : 16 17
+Program_Line_No_Semi_Colon : 72 72 73 74 75 76
+Read_Line            : 20 29
+Read_Line_ln         : 23 33
+Type                 : 7 11
+Var_Declaration      : 1
+Var_Line             : 5 6
+Var_Lines            : 3 5
+Var_Names            : 7 12
+While_Statement      : 26 36
+Write_Arg            : 39 40
+Write_Args           : 37 38 39
+Write_Line           : 18 27
+Write_Line_No_ln     : 19 28
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . Pascal_Prog
+    (1) Pascal_Prog -> . PROGRAM identifier ; Var_Declaration Code
+
+    PROGRAM         shift and go to state 2
+
+    Pascal_Prog                    shift and go to state 1
+
+state 1
+
+    (0) S' -> Pascal_Prog .
+
+
+
+state 2
+
+    (1) Pascal_Prog -> PROGRAM . identifier ; Var_Declaration Code
+
+    identifier      shift and go to state 3
+
+
+state 3
+
+    (1) Pascal_Prog -> PROGRAM identifier . ; Var_Declaration Code
+
+    ;               shift and go to state 4
+
+
+state 4
+
+    (1) Pascal_Prog -> PROGRAM identifier ; . Var_Declaration Code
+    (2) Var_Declaration -> .
+    (3) Var_Declaration -> . VAR Var_Lines
+
+    BEGIN           reduce using rule 2 (Var_Declaration -> .)
+    VAR             shift and go to state 6
+
+    Var_Declaration                shift and go to state 5
+
+state 5
+
+    (1) Pascal_Prog -> PROGRAM identifier ; Var_Declaration . Code
+    (14) Code -> . BEGIN Lines_Of_Code END .
+
+    BEGIN           shift and go to state 8
+
+    Code                           shift and go to state 7
+
+state 6
+
+    (3) Var_Declaration -> VAR . Var_Lines
+    (4) Var_Lines -> .
+    (5) Var_Lines -> . Var_Lines Var_Line
+    (6) Var_Lines -> . Var_Line
+    (7) Var_Line -> . Var_Names : Type ;
+    (12) Var_Names -> . Var_Names , identifier
+    (13) Var_Names -> . identifier
+
+  ! shift/reduce conflict for identifier resolved as shift
+    BEGIN           reduce using rule 4 (Var_Lines -> .)
+    identifier      shift and go to state 12
+
+  ! identifier      [ reduce using rule 4 (Var_Lines -> .) ]
+
+    Var_Lines                      shift and go to state 9
+    Var_Line                       shift and go to state 10
+    Var_Names                      shift and go to state 11
+
+state 7
+
+    (1) Pascal_Prog -> PROGRAM identifier ; Var_Declaration Code .
+
+    $end            reduce using rule 1 (Pascal_Prog -> PROGRAM identifier ; Var_Declaration Code .)
+
+
+state 8
+
+    (14) Code -> BEGIN . Lines_Of_Code END .
+    (15) Lines_Of_Code -> .
+    (16) Lines_Of_Code -> . Lines_Of_Code Program_Line
+    (17) Lines_Of_Code -> . Program_Line
+    (18) Program_Line -> . Write_Line ;
+    (19) Program_Line -> . Write_Line_No_ln ;
+    (20) Program_Line -> . Read_Line ;
+    (21) Program_Line -> . If_Statement ;
+    (22) Program_Line -> . Assignment ;
+    (23) Program_Line -> . Read_Line_ln ;
+    (24) Program_Line -> . Block ;
+    (25) Program_Line -> . For_Statement ;
+    (26) Program_Line -> . While_Statement ;
+    (37) Write_Line -> . WRITELN ( Write_Args )
+    (38) Write_Line_No_ln -> . WRITE ( Write_Args )
+    (43) Read_Line -> . READ ( identifier )
+    (45) Read_Line -> . READLN ( identifier [ Expression ] )
+    (70) If_Statement -> . If_Statement_Complete
+    (71) If_Statement -> . If_Statement_Incomplete
+    (68) Assignment -> . identifier assign Expression
+    (44) Read_Line_ln -> . READLN ( identifier )
+    (69) Block -> . BEGIN Lines_Of_Code END
+    (74) For_Statement -> . FOR identifier assign Expression TO Expression DO Program_Line_No_Semi_Colon
+    (75) For_Statement -> . FOR identifier assign Expression DOWNTO Expression DO Program_Line_No_Semi_Colon
+    (76) While_Statement -> . WHILE Expression DO Program_Line_No_Semi_Colon
+    (72) If_Statement_Complete -> . IF Expression THEN Program_Line_No_Semi_Colon ELSE Program_Line_No_Semi_Colon
+    (73) If_Statement_Incomplete -> . IF Expression THEN Program_Line_No_Semi_Colon
+
+  ! shift/reduce conflict for WRITELN resolved as shift
+  ! shift/reduce conflict for WRITE resolved as shift
+  ! shift/reduce conflict for READ resolved as shift
+  ! shift/reduce conflict for READLN resolved as shift
+  ! shift/reduce conflict for identifier resolved as shift
+  ! shift/reduce conflict for BEGIN resolved as shift
+  ! shift/reduce conflict for FOR resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+    END             reduce using rule 15 (Lines_Of_Code -> .)
+    WRITELN         shift and go to state 25
+    WRITE           shift and go to state 26
+    READ            shift and go to state 27
+    READLN          shift and go to state 29
+    identifier      shift and go to state 28
+    BEGIN           shift and go to state 13
+    FOR             shift and go to state 32
+    WHILE           shift and go to state 33
+    IF              shift and go to state 34
+
+  ! WRITELN         [ reduce using rule 15 (Lines_Of_Code -> .) ]
+  ! WRITE           [ reduce using rule 15 (Lines_Of_Code -> .) ]
+  ! READ            [ reduce using rule 15 (Lines_Of_Code -> .) ]
+  ! READLN          [ reduce using rule 15 (Lines_Of_Code -> .) ]
+  ! identifier      [ reduce using rule 15 (Lines_Of_Code -> .) ]
+  ! BEGIN           [ reduce using rule 15 (Lines_Of_Code -> .) ]
+  ! FOR             [ reduce using rule 15 (Lines_Of_Code -> .) ]
+  ! WHILE           [ reduce using rule 15 (Lines_Of_Code -> .) ]
+  ! IF              [ reduce using rule 15 (Lines_Of_Code -> .) ]
+
+    Lines_Of_Code                  shift and go to state 14
+    Program_Line                   shift and go to state 15
+    Write_Line                     shift and go to state 16
+    Write_Line_No_ln               shift and go to state 17
+    Read_Line                      shift and go to state 18
+    If_Statement                   shift and go to state 19
+    Assignment                     shift and go to state 20
+    Read_Line_ln                   shift and go to state 21
+    Block                          shift and go to state 22
+    For_Statement                  shift and go to state 23
+    While_Statement                shift and go to state 24
+    If_Statement_Complete          shift and go to state 30
+    If_Statement_Incomplete        shift and go to state 31
+
+state 9
+
+    (3) Var_Declaration -> VAR Var_Lines .
+    (5) Var_Lines -> Var_Lines . Var_Line
+    (7) Var_Line -> . Var_Names : Type ;
+    (12) Var_Names -> . Var_Names , identifier
+    (13) Var_Names -> . identifier
+
+    BEGIN           reduce using rule 3 (Var_Declaration -> VAR Var_Lines .)
+    identifier      shift and go to state 12
+
+    Var_Line                       shift and go to state 35
+    Var_Names                      shift and go to state 11
+
+state 10
+
+    (6) Var_Lines -> Var_Line .
+
+    identifier      reduce using rule 6 (Var_Lines -> Var_Line .)
+    BEGIN           reduce using rule 6 (Var_Lines -> Var_Line .)
+
+
+state 11
+
+    (7) Var_Line -> Var_Names . : Type ;
+    (12) Var_Names -> Var_Names . , identifier
+
+    :               shift and go to state 36
+    ,               shift and go to state 37
+
+
+state 12
+
+    (13) Var_Names -> identifier .
+
+    :               reduce using rule 13 (Var_Names -> identifier .)
+    ,               reduce using rule 13 (Var_Names -> identifier .)
+
+
+state 13
+
+    (69) Block -> BEGIN . Lines_Of_Code END
+    (15) Lines_Of_Code -> .
+    (16) Lines_Of_Code -> . Lines_Of_Code Program_Line
+    (17) Lines_Of_Code -> . Program_Line
+    (18) Program_Line -> . Write_Line ;
+    (19) Program_Line -> . Write_Line_No_ln ;
+    (20) Program_Line -> . Read_Line ;
+    (21) Program_Line -> . If_Statement ;
+    (22) Program_Line -> . Assignment ;
+    (23) Program_Line -> . Read_Line_ln ;
+    (24) Program_Line -> . Block ;
+    (25) Program_Line -> . For_Statement ;
+    (26) Program_Line -> . While_Statement ;
+    (37) Write_Line -> . WRITELN ( Write_Args )
+    (38) Write_Line_No_ln -> . WRITE ( Write_Args )
+    (43) Read_Line -> . READ ( identifier )
+    (45) Read_Line -> . READLN ( identifier [ Expression ] )
+    (70) If_Statement -> . If_Statement_Complete
+    (71) If_Statement -> . If_Statement_Incomplete
+    (68) Assignment -> . identifier assign Expression
+    (44) Read_Line_ln -> . READLN ( identifier )
+    (69) Block -> . BEGIN Lines_Of_Code END
+    (74) For_Statement -> . FOR identifier assign Expression TO Expression DO Program_Line_No_Semi_Colon
+    (75) For_Statement -> . FOR identifier assign Expression DOWNTO Expression DO Program_Line_No_Semi_Colon
+    (76) While_Statement -> . WHILE Expression DO Program_Line_No_Semi_Colon
+    (72) If_Statement_Complete -> . IF Expression THEN Program_Line_No_Semi_Colon ELSE Program_Line_No_Semi_Colon
+    (73) If_Statement_Incomplete -> . IF Expression THEN Program_Line_No_Semi_Colon
+
+  ! shift/reduce conflict for WRITELN resolved as shift
+  ! shift/reduce conflict for WRITE resolved as shift
+  ! shift/reduce conflict for READ resolved as shift
+  ! shift/reduce conflict for READLN resolved as shift
+  ! shift/reduce conflict for identifier resolved as shift
+  ! shift/reduce conflict for BEGIN resolved as shift
+  ! shift/reduce conflict for FOR resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+    END             reduce using rule 15 (Lines_Of_Code -> .)
+    WRITELN         shift and go to state 25
+    WRITE           shift and go to state 26
+    READ            shift and go to state 27
+    READLN          shift and go to state 29
+    identifier      shift and go to state 28
+    BEGIN           shift and go to state 13
+    FOR             shift and go to state 32
+    WHILE           shift and go to state 33
+    IF              shift and go to state 34
+
+  ! WRITELN         [ reduce using rule 15 (Lines_Of_Code -> .) ]
+  ! WRITE           [ reduce using rule 15 (Lines_Of_Code -> .) ]
+  ! READ            [ reduce using rule 15 (Lines_Of_Code -> .) ]
+  ! READLN          [ reduce using rule 15 (Lines_Of_Code -> .) ]
+  ! identifier      [ reduce using rule 15 (Lines_Of_Code -> .) ]
+  ! BEGIN           [ reduce using rule 15 (Lines_Of_Code -> .) ]
+  ! FOR             [ reduce using rule 15 (Lines_Of_Code -> .) ]
+  ! WHILE           [ reduce using rule 15 (Lines_Of_Code -> .) ]
+  ! IF              [ reduce using rule 15 (Lines_Of_Code -> .) ]
+
+    Lines_Of_Code                  shift and go to state 38
+    Program_Line                   shift and go to state 15
+    Write_Line                     shift and go to state 16
+    Write_Line_No_ln               shift and go to state 17
+    Read_Line                      shift and go to state 18
+    If_Statement                   shift and go to state 19
+    Assignment                     shift and go to state 20
+    Read_Line_ln                   shift and go to state 21
+    Block                          shift and go to state 22
+    For_Statement                  shift and go to state 23
+    While_Statement                shift and go to state 24
+    If_Statement_Complete          shift and go to state 30
+    If_Statement_Incomplete        shift and go to state 31
+
+state 14
+
+    (14) Code -> BEGIN Lines_Of_Code . END .
+    (16) Lines_Of_Code -> Lines_Of_Code . Program_Line
+    (18) Program_Line -> . Write_Line ;
+    (19) Program_Line -> . Write_Line_No_ln ;
+    (20) Program_Line -> . Read_Line ;
+    (21) Program_Line -> . If_Statement ;
+    (22) Program_Line -> . Assignment ;
+    (23) Program_Line -> . Read_Line_ln ;
+    (24) Program_Line -> . Block ;
+    (25) Program_Line -> . For_Statement ;
+    (26) Program_Line -> . While_Statement ;
+    (37) Write_Line -> . WRITELN ( Write_Args )
+    (38) Write_Line_No_ln -> . WRITE ( Write_Args )
+    (43) Read_Line -> . READ ( identifier )
+    (45) Read_Line -> . READLN ( identifier [ Expression ] )
+    (70) If_Statement -> . If_Statement_Complete
+    (71) If_Statement -> . If_Statement_Incomplete
+    (68) Assignment -> . identifier assign Expression
+    (44) Read_Line_ln -> . READLN ( identifier )
+    (69) Block -> . BEGIN Lines_Of_Code END
+    (74) For_Statement -> . FOR identifier assign Expression TO Expression DO Program_Line_No_Semi_Colon
+    (75) For_Statement -> . FOR identifier assign Expression DOWNTO Expression DO Program_Line_No_Semi_Colon
+    (76) While_Statement -> . WHILE Expression DO Program_Line_No_Semi_Colon
+    (72) If_Statement_Complete -> . IF Expression THEN Program_Line_No_Semi_Colon ELSE Program_Line_No_Semi_Colon
+    (73) If_Statement_Incomplete -> . IF Expression THEN Program_Line_No_Semi_Colon
+
+    END             shift and go to state 39
+    WRITELN         shift and go to state 25
+    WRITE           shift and go to state 26
+    READ            shift and go to state 27
+    READLN          shift and go to state 29
+    identifier      shift and go to state 28
+    BEGIN           shift and go to state 13
+    FOR             shift and go to state 32
+    WHILE           shift and go to state 33
+    IF              shift and go to state 34
+
+    Program_Line                   shift and go to state 40
+    Write_Line                     shift and go to state 16
+    Write_Line_No_ln               shift and go to state 17
+    Read_Line                      shift and go to state 18
+    If_Statement                   shift and go to state 19
+    Assignment                     shift and go to state 20
+    Read_Line_ln                   shift and go to state 21
+    Block                          shift and go to state 22
+    For_Statement                  shift and go to state 23
+    While_Statement                shift and go to state 24
+    If_Statement_Complete          shift and go to state 30
+    If_Statement_Incomplete        shift and go to state 31
+
+state 15
+
+    (17) Lines_Of_Code -> Program_Line .
+
+    END             reduce using rule 17 (Lines_Of_Code -> Program_Line .)
+    WRITELN         reduce using rule 17 (Lines_Of_Code -> Program_Line .)
+    WRITE           reduce using rule 17 (Lines_Of_Code -> Program_Line .)
+    READ            reduce using rule 17 (Lines_Of_Code -> Program_Line .)
+    READLN          reduce using rule 17 (Lines_Of_Code -> Program_Line .)
+    identifier      reduce using rule 17 (Lines_Of_Code -> Program_Line .)
+    BEGIN           reduce using rule 17 (Lines_Of_Code -> Program_Line .)
+    FOR             reduce using rule 17 (Lines_Of_Code -> Program_Line .)
+    WHILE           reduce using rule 17 (Lines_Of_Code -> Program_Line .)
+    IF              reduce using rule 17 (Lines_Of_Code -> Program_Line .)
+
+
+state 16
+
+    (18) Program_Line -> Write_Line . ;
+
+    ;               shift and go to state 41
+
+
+state 17
+
+    (19) Program_Line -> Write_Line_No_ln . ;
+
+    ;               shift and go to state 42
+
+
+state 18
+
+    (20) Program_Line -> Read_Line . ;
+
+    ;               shift and go to state 43
+
+
+state 19
+
+    (21) Program_Line -> If_Statement . ;
+
+    ;               shift and go to state 44
+
+
+state 20
+
+    (22) Program_Line -> Assignment . ;
+
+    ;               shift and go to state 45
+
+
+state 21
+
+    (23) Program_Line -> Read_Line_ln . ;
+
+    ;               shift and go to state 46
+
+
+state 22
+
+    (24) Program_Line -> Block . ;
+
+    ;               shift and go to state 47
+
+
+state 23
+
+    (25) Program_Line -> For_Statement . ;
+
+    ;               shift and go to state 48
+
+
+state 24
+
+    (26) Program_Line -> While_Statement . ;
+
+    ;               shift and go to state 49
+
+
+state 25
+
+    (37) Write_Line -> WRITELN . ( Write_Args )
+
+    (               shift and go to state 50
+
+
+state 26
+
+    (38) Write_Line_No_ln -> WRITE . ( Write_Args )
+
+    (               shift and go to state 51
+
+
+state 27
+
+    (43) Read_Line -> READ . ( identifier )
+
+    (               shift and go to state 52
+
+
+state 28
+
+    (68) Assignment -> identifier . assign Expression
+
+    assign          shift and go to state 53
+
+
+state 29
+
+    (45) Read_Line -> READLN . ( identifier [ Expression ] )
+    (44) Read_Line_ln -> READLN . ( identifier )
+
+    (               shift and go to state 54
+
+
+state 30
+
+    (70) If_Statement -> If_Statement_Complete .
+
+    ;               reduce using rule 70 (If_Statement -> If_Statement_Complete .)
+
+
+state 31
+
+    (71) If_Statement -> If_Statement_Incomplete .
+
+    ;               reduce using rule 71 (If_Statement -> If_Statement_Incomplete .)
+
+
+state 32
+
+    (74) For_Statement -> FOR . identifier assign Expression TO Expression DO Program_Line_No_Semi_Colon
+    (75) For_Statement -> FOR . identifier assign Expression DOWNTO Expression DO Program_Line_No_Semi_Colon
+
+    identifier      shift and go to state 55
+
+
+state 33
+
+    (76) While_Statement -> WHILE . Expression DO Program_Line_No_Semi_Colon
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 56
+
+state 34
+
+    (72) If_Statement_Complete -> IF . Expression THEN Program_Line_No_Semi_Colon ELSE Program_Line_No_Semi_Colon
+    (73) If_Statement_Incomplete -> IF . Expression THEN Program_Line_No_Semi_Colon
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 65
+
+state 35
+
+    (5) Var_Lines -> Var_Lines Var_Line .
+
+    identifier      reduce using rule 5 (Var_Lines -> Var_Lines Var_Line .)
+    BEGIN           reduce using rule 5 (Var_Lines -> Var_Lines Var_Line .)
+
+
+state 36
+
+    (7) Var_Line -> Var_Names : . Type ;
+    (8) Type -> . INTEGER
+    (9) Type -> . STRING
+    (10) Type -> . BOOLEAN
+    (11) Type -> . ARRAY [ number dotdot number ] OF Type
+
+    INTEGER         shift and go to state 67
+    STRING          shift and go to state 68
+    BOOLEAN         shift and go to state 69
+    ARRAY           shift and go to state 70
+
+    Type                           shift and go to state 66
+
+state 37
+
+    (12) Var_Names -> Var_Names , . identifier
+
+    identifier      shift and go to state 71
+
+
+state 38
+
+    (69) Block -> BEGIN Lines_Of_Code . END
+    (16) Lines_Of_Code -> Lines_Of_Code . Program_Line
+    (18) Program_Line -> . Write_Line ;
+    (19) Program_Line -> . Write_Line_No_ln ;
+    (20) Program_Line -> . Read_Line ;
+    (21) Program_Line -> . If_Statement ;
+    (22) Program_Line -> . Assignment ;
+    (23) Program_Line -> . Read_Line_ln ;
+    (24) Program_Line -> . Block ;
+    (25) Program_Line -> . For_Statement ;
+    (26) Program_Line -> . While_Statement ;
+    (37) Write_Line -> . WRITELN ( Write_Args )
+    (38) Write_Line_No_ln -> . WRITE ( Write_Args )
+    (43) Read_Line -> . READ ( identifier )
+    (45) Read_Line -> . READLN ( identifier [ Expression ] )
+    (70) If_Statement -> . If_Statement_Complete
+    (71) If_Statement -> . If_Statement_Incomplete
+    (68) Assignment -> . identifier assign Expression
+    (44) Read_Line_ln -> . READLN ( identifier )
+    (69) Block -> . BEGIN Lines_Of_Code END
+    (74) For_Statement -> . FOR identifier assign Expression TO Expression DO Program_Line_No_Semi_Colon
+    (75) For_Statement -> . FOR identifier assign Expression DOWNTO Expression DO Program_Line_No_Semi_Colon
+    (76) While_Statement -> . WHILE Expression DO Program_Line_No_Semi_Colon
+    (72) If_Statement_Complete -> . IF Expression THEN Program_Line_No_Semi_Colon ELSE Program_Line_No_Semi_Colon
+    (73) If_Statement_Incomplete -> . IF Expression THEN Program_Line_No_Semi_Colon
+
+    END             shift and go to state 72
+    WRITELN         shift and go to state 25
+    WRITE           shift and go to state 26
+    READ            shift and go to state 27
+    READLN          shift and go to state 29
+    identifier      shift and go to state 28
+    BEGIN           shift and go to state 13
+    FOR             shift and go to state 32
+    WHILE           shift and go to state 33
+    IF              shift and go to state 34
+
+    Program_Line                   shift and go to state 40
+    Write_Line                     shift and go to state 16
+    Write_Line_No_ln               shift and go to state 17
+    Read_Line                      shift and go to state 18
+    If_Statement                   shift and go to state 19
+    Assignment                     shift and go to state 20
+    Read_Line_ln                   shift and go to state 21
+    Block                          shift and go to state 22
+    For_Statement                  shift and go to state 23
+    While_Statement                shift and go to state 24
+    If_Statement_Complete          shift and go to state 30
+    If_Statement_Incomplete        shift and go to state 31
+
+state 39
+
+    (14) Code -> BEGIN Lines_Of_Code END . .
+
+    .               shift and go to state 73
+
+
+state 40
+
+    (16) Lines_Of_Code -> Lines_Of_Code Program_Line .
+
+    END             reduce using rule 16 (Lines_Of_Code -> Lines_Of_Code Program_Line .)
+    WRITELN         reduce using rule 16 (Lines_Of_Code -> Lines_Of_Code Program_Line .)
+    WRITE           reduce using rule 16 (Lines_Of_Code -> Lines_Of_Code Program_Line .)
+    READ            reduce using rule 16 (Lines_Of_Code -> Lines_Of_Code Program_Line .)
+    READLN          reduce using rule 16 (Lines_Of_Code -> Lines_Of_Code Program_Line .)
+    identifier      reduce using rule 16 (Lines_Of_Code -> Lines_Of_Code Program_Line .)
+    BEGIN           reduce using rule 16 (Lines_Of_Code -> Lines_Of_Code Program_Line .)
+    FOR             reduce using rule 16 (Lines_Of_Code -> Lines_Of_Code Program_Line .)
+    WHILE           reduce using rule 16 (Lines_Of_Code -> Lines_Of_Code Program_Line .)
+    IF              reduce using rule 16 (Lines_Of_Code -> Lines_Of_Code Program_Line .)
+
+
+state 41
+
+    (18) Program_Line -> Write_Line ; .
+
+    END             reduce using rule 18 (Program_Line -> Write_Line ; .)
+    WRITELN         reduce using rule 18 (Program_Line -> Write_Line ; .)
+    WRITE           reduce using rule 18 (Program_Line -> Write_Line ; .)
+    READ            reduce using rule 18 (Program_Line -> Write_Line ; .)
+    READLN          reduce using rule 18 (Program_Line -> Write_Line ; .)
+    identifier      reduce using rule 18 (Program_Line -> Write_Line ; .)
+    BEGIN           reduce using rule 18 (Program_Line -> Write_Line ; .)
+    FOR             reduce using rule 18 (Program_Line -> Write_Line ; .)
+    WHILE           reduce using rule 18 (Program_Line -> Write_Line ; .)
+    IF              reduce using rule 18 (Program_Line -> Write_Line ; .)
+
+
+state 42
+
+    (19) Program_Line -> Write_Line_No_ln ; .
+
+    END             reduce using rule 19 (Program_Line -> Write_Line_No_ln ; .)
+    WRITELN         reduce using rule 19 (Program_Line -> Write_Line_No_ln ; .)
+    WRITE           reduce using rule 19 (Program_Line -> Write_Line_No_ln ; .)
+    READ            reduce using rule 19 (Program_Line -> Write_Line_No_ln ; .)
+    READLN          reduce using rule 19 (Program_Line -> Write_Line_No_ln ; .)
+    identifier      reduce using rule 19 (Program_Line -> Write_Line_No_ln ; .)
+    BEGIN           reduce using rule 19 (Program_Line -> Write_Line_No_ln ; .)
+    FOR             reduce using rule 19 (Program_Line -> Write_Line_No_ln ; .)
+    WHILE           reduce using rule 19 (Program_Line -> Write_Line_No_ln ; .)
+    IF              reduce using rule 19 (Program_Line -> Write_Line_No_ln ; .)
+
+
+state 43
+
+    (20) Program_Line -> Read_Line ; .
+
+    END             reduce using rule 20 (Program_Line -> Read_Line ; .)
+    WRITELN         reduce using rule 20 (Program_Line -> Read_Line ; .)
+    WRITE           reduce using rule 20 (Program_Line -> Read_Line ; .)
+    READ            reduce using rule 20 (Program_Line -> Read_Line ; .)
+    READLN          reduce using rule 20 (Program_Line -> Read_Line ; .)
+    identifier      reduce using rule 20 (Program_Line -> Read_Line ; .)
+    BEGIN           reduce using rule 20 (Program_Line -> Read_Line ; .)
+    FOR             reduce using rule 20 (Program_Line -> Read_Line ; .)
+    WHILE           reduce using rule 20 (Program_Line -> Read_Line ; .)
+    IF              reduce using rule 20 (Program_Line -> Read_Line ; .)
+
+
+state 44
+
+    (21) Program_Line -> If_Statement ; .
+
+    END             reduce using rule 21 (Program_Line -> If_Statement ; .)
+    WRITELN         reduce using rule 21 (Program_Line -> If_Statement ; .)
+    WRITE           reduce using rule 21 (Program_Line -> If_Statement ; .)
+    READ            reduce using rule 21 (Program_Line -> If_Statement ; .)
+    READLN          reduce using rule 21 (Program_Line -> If_Statement ; .)
+    identifier      reduce using rule 21 (Program_Line -> If_Statement ; .)
+    BEGIN           reduce using rule 21 (Program_Line -> If_Statement ; .)
+    FOR             reduce using rule 21 (Program_Line -> If_Statement ; .)
+    WHILE           reduce using rule 21 (Program_Line -> If_Statement ; .)
+    IF              reduce using rule 21 (Program_Line -> If_Statement ; .)
+
+
+state 45
+
+    (22) Program_Line -> Assignment ; .
+
+    END             reduce using rule 22 (Program_Line -> Assignment ; .)
+    WRITELN         reduce using rule 22 (Program_Line -> Assignment ; .)
+    WRITE           reduce using rule 22 (Program_Line -> Assignment ; .)
+    READ            reduce using rule 22 (Program_Line -> Assignment ; .)
+    READLN          reduce using rule 22 (Program_Line -> Assignment ; .)
+    identifier      reduce using rule 22 (Program_Line -> Assignment ; .)
+    BEGIN           reduce using rule 22 (Program_Line -> Assignment ; .)
+    FOR             reduce using rule 22 (Program_Line -> Assignment ; .)
+    WHILE           reduce using rule 22 (Program_Line -> Assignment ; .)
+    IF              reduce using rule 22 (Program_Line -> Assignment ; .)
+
+
+state 46
+
+    (23) Program_Line -> Read_Line_ln ; .
+
+    END             reduce using rule 23 (Program_Line -> Read_Line_ln ; .)
+    WRITELN         reduce using rule 23 (Program_Line -> Read_Line_ln ; .)
+    WRITE           reduce using rule 23 (Program_Line -> Read_Line_ln ; .)
+    READ            reduce using rule 23 (Program_Line -> Read_Line_ln ; .)
+    READLN          reduce using rule 23 (Program_Line -> Read_Line_ln ; .)
+    identifier      reduce using rule 23 (Program_Line -> Read_Line_ln ; .)
+    BEGIN           reduce using rule 23 (Program_Line -> Read_Line_ln ; .)
+    FOR             reduce using rule 23 (Program_Line -> Read_Line_ln ; .)
+    WHILE           reduce using rule 23 (Program_Line -> Read_Line_ln ; .)
+    IF              reduce using rule 23 (Program_Line -> Read_Line_ln ; .)
+
+
+state 47
+
+    (24) Program_Line -> Block ; .
+
+    END             reduce using rule 24 (Program_Line -> Block ; .)
+    WRITELN         reduce using rule 24 (Program_Line -> Block ; .)
+    WRITE           reduce using rule 24 (Program_Line -> Block ; .)
+    READ            reduce using rule 24 (Program_Line -> Block ; .)
+    READLN          reduce using rule 24 (Program_Line -> Block ; .)
+    identifier      reduce using rule 24 (Program_Line -> Block ; .)
+    BEGIN           reduce using rule 24 (Program_Line -> Block ; .)
+    FOR             reduce using rule 24 (Program_Line -> Block ; .)
+    WHILE           reduce using rule 24 (Program_Line -> Block ; .)
+    IF              reduce using rule 24 (Program_Line -> Block ; .)
+
+
+state 48
+
+    (25) Program_Line -> For_Statement ; .
+
+    END             reduce using rule 25 (Program_Line -> For_Statement ; .)
+    WRITELN         reduce using rule 25 (Program_Line -> For_Statement ; .)
+    WRITE           reduce using rule 25 (Program_Line -> For_Statement ; .)
+    READ            reduce using rule 25 (Program_Line -> For_Statement ; .)
+    READLN          reduce using rule 25 (Program_Line -> For_Statement ; .)
+    identifier      reduce using rule 25 (Program_Line -> For_Statement ; .)
+    BEGIN           reduce using rule 25 (Program_Line -> For_Statement ; .)
+    FOR             reduce using rule 25 (Program_Line -> For_Statement ; .)
+    WHILE           reduce using rule 25 (Program_Line -> For_Statement ; .)
+    IF              reduce using rule 25 (Program_Line -> For_Statement ; .)
+
+
+state 49
+
+    (26) Program_Line -> While_Statement ; .
+
+    END             reduce using rule 26 (Program_Line -> While_Statement ; .)
+    WRITELN         reduce using rule 26 (Program_Line -> While_Statement ; .)
+    WRITE           reduce using rule 26 (Program_Line -> While_Statement ; .)
+    READ            reduce using rule 26 (Program_Line -> While_Statement ; .)
+    READLN          reduce using rule 26 (Program_Line -> While_Statement ; .)
+    identifier      reduce using rule 26 (Program_Line -> While_Statement ; .)
+    BEGIN           reduce using rule 26 (Program_Line -> While_Statement ; .)
+    FOR             reduce using rule 26 (Program_Line -> While_Statement ; .)
+    WHILE           reduce using rule 26 (Program_Line -> While_Statement ; .)
+    IF              reduce using rule 26 (Program_Line -> While_Statement ; .)
+
+
+state 50
+
+    (37) Write_Line -> WRITELN ( . Write_Args )
+    (39) Write_Args -> . Write_Args , Write_Arg
+    (40) Write_Args -> . Write_Arg
+    (41) Write_Arg -> . argument
+    (42) Write_Arg -> . identifier
+
+    argument        shift and go to state 76
+    identifier      shift and go to state 77
+
+    Write_Args                     shift and go to state 74
+    Write_Arg                      shift and go to state 75
+
+state 51
+
+    (38) Write_Line_No_ln -> WRITE ( . Write_Args )
+    (39) Write_Args -> . Write_Args , Write_Arg
+    (40) Write_Args -> . Write_Arg
+    (41) Write_Arg -> . argument
+    (42) Write_Arg -> . identifier
+
+    argument        shift and go to state 76
+    identifier      shift and go to state 77
+
+    Write_Args                     shift and go to state 78
+    Write_Arg                      shift and go to state 75
+
+state 52
+
+    (43) Read_Line -> READ ( . identifier )
+
+    identifier      shift and go to state 79
+
+
+state 53
+
+    (68) Assignment -> identifier assign . Expression
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 80
+
+state 54
+
+    (45) Read_Line -> READLN ( . identifier [ Expression ] )
+    (44) Read_Line_ln -> READLN ( . identifier )
+
+    identifier      shift and go to state 81
+
+
+state 55
+
+    (74) For_Statement -> FOR identifier . assign Expression TO Expression DO Program_Line_No_Semi_Colon
+    (75) For_Statement -> FOR identifier . assign Expression DOWNTO Expression DO Program_Line_No_Semi_Colon
+
+    assign          shift and go to state 82
+
+
+state 56
+
+    (76) While_Statement -> WHILE Expression . DO Program_Line_No_Semi_Colon
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+    DO              shift and go to state 83
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+
+state 57
+
+    (59) Expression -> ( . Expression )
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 97
+
+state 58
+
+    (60) Expression -> identifier .
+    (61) Expression -> identifier . [ Expression ]
+
+    DO              reduce using rule 60 (Expression -> identifier .)
+    +               reduce using rule 60 (Expression -> identifier .)
+    -               reduce using rule 60 (Expression -> identifier .)
+    *               reduce using rule 60 (Expression -> identifier .)
+    /               reduce using rule 60 (Expression -> identifier .)
+    >               reduce using rule 60 (Expression -> identifier .)
+    <               reduce using rule 60 (Expression -> identifier .)
+    =               reduce using rule 60 (Expression -> identifier .)
+    lowerequal      reduce using rule 60 (Expression -> identifier .)
+    greaterequal    reduce using rule 60 (Expression -> identifier .)
+    DIV             reduce using rule 60 (Expression -> identifier .)
+    MOD             reduce using rule 60 (Expression -> identifier .)
+    AND             reduce using rule 60 (Expression -> identifier .)
+    OR              reduce using rule 60 (Expression -> identifier .)
+    THEN            reduce using rule 60 (Expression -> identifier .)
+    ;               reduce using rule 60 (Expression -> identifier .)
+    ELSE            reduce using rule 60 (Expression -> identifier .)
+    )               reduce using rule 60 (Expression -> identifier .)
+    TO              reduce using rule 60 (Expression -> identifier .)
+    DOWNTO          reduce using rule 60 (Expression -> identifier .)
+    ]               reduce using rule 60 (Expression -> identifier .)
+    [               shift and go to state 98
+
+
+state 59
+
+    (62) Expression -> number .
+
+    DO              reduce using rule 62 (Expression -> number .)
+    +               reduce using rule 62 (Expression -> number .)
+    -               reduce using rule 62 (Expression -> number .)
+    *               reduce using rule 62 (Expression -> number .)
+    /               reduce using rule 62 (Expression -> number .)
+    >               reduce using rule 62 (Expression -> number .)
+    <               reduce using rule 62 (Expression -> number .)
+    =               reduce using rule 62 (Expression -> number .)
+    lowerequal      reduce using rule 62 (Expression -> number .)
+    greaterequal    reduce using rule 62 (Expression -> number .)
+    DIV             reduce using rule 62 (Expression -> number .)
+    MOD             reduce using rule 62 (Expression -> number .)
+    AND             reduce using rule 62 (Expression -> number .)
+    OR              reduce using rule 62 (Expression -> number .)
+    THEN            reduce using rule 62 (Expression -> number .)
+    ;               reduce using rule 62 (Expression -> number .)
+    ELSE            reduce using rule 62 (Expression -> number .)
+    )               reduce using rule 62 (Expression -> number .)
+    TO              reduce using rule 62 (Expression -> number .)
+    DOWNTO          reduce using rule 62 (Expression -> number .)
+    ]               reduce using rule 62 (Expression -> number .)
+
+
+state 60
+
+    (63) Expression -> argument .
+
+    DO              reduce using rule 63 (Expression -> argument .)
+    +               reduce using rule 63 (Expression -> argument .)
+    -               reduce using rule 63 (Expression -> argument .)
+    *               reduce using rule 63 (Expression -> argument .)
+    /               reduce using rule 63 (Expression -> argument .)
+    >               reduce using rule 63 (Expression -> argument .)
+    <               reduce using rule 63 (Expression -> argument .)
+    =               reduce using rule 63 (Expression -> argument .)
+    lowerequal      reduce using rule 63 (Expression -> argument .)
+    greaterequal    reduce using rule 63 (Expression -> argument .)
+    DIV             reduce using rule 63 (Expression -> argument .)
+    MOD             reduce using rule 63 (Expression -> argument .)
+    AND             reduce using rule 63 (Expression -> argument .)
+    OR              reduce using rule 63 (Expression -> argument .)
+    THEN            reduce using rule 63 (Expression -> argument .)
+    ;               reduce using rule 63 (Expression -> argument .)
+    ELSE            reduce using rule 63 (Expression -> argument .)
+    )               reduce using rule 63 (Expression -> argument .)
+    TO              reduce using rule 63 (Expression -> argument .)
+    DOWNTO          reduce using rule 63 (Expression -> argument .)
+    ]               reduce using rule 63 (Expression -> argument .)
+
+
+state 61
+
+    (64) Expression -> TRUE .
+
+    DO              reduce using rule 64 (Expression -> TRUE .)
+    +               reduce using rule 64 (Expression -> TRUE .)
+    -               reduce using rule 64 (Expression -> TRUE .)
+    *               reduce using rule 64 (Expression -> TRUE .)
+    /               reduce using rule 64 (Expression -> TRUE .)
+    >               reduce using rule 64 (Expression -> TRUE .)
+    <               reduce using rule 64 (Expression -> TRUE .)
+    =               reduce using rule 64 (Expression -> TRUE .)
+    lowerequal      reduce using rule 64 (Expression -> TRUE .)
+    greaterequal    reduce using rule 64 (Expression -> TRUE .)
+    DIV             reduce using rule 64 (Expression -> TRUE .)
+    MOD             reduce using rule 64 (Expression -> TRUE .)
+    AND             reduce using rule 64 (Expression -> TRUE .)
+    OR              reduce using rule 64 (Expression -> TRUE .)
+    THEN            reduce using rule 64 (Expression -> TRUE .)
+    ;               reduce using rule 64 (Expression -> TRUE .)
+    ELSE            reduce using rule 64 (Expression -> TRUE .)
+    )               reduce using rule 64 (Expression -> TRUE .)
+    TO              reduce using rule 64 (Expression -> TRUE .)
+    DOWNTO          reduce using rule 64 (Expression -> TRUE .)
+    ]               reduce using rule 64 (Expression -> TRUE .)
+
+
+state 62
+
+    (65) Expression -> FALSE .
+
+    DO              reduce using rule 65 (Expression -> FALSE .)
+    +               reduce using rule 65 (Expression -> FALSE .)
+    -               reduce using rule 65 (Expression -> FALSE .)
+    *               reduce using rule 65 (Expression -> FALSE .)
+    /               reduce using rule 65 (Expression -> FALSE .)
+    >               reduce using rule 65 (Expression -> FALSE .)
+    <               reduce using rule 65 (Expression -> FALSE .)
+    =               reduce using rule 65 (Expression -> FALSE .)
+    lowerequal      reduce using rule 65 (Expression -> FALSE .)
+    greaterequal    reduce using rule 65 (Expression -> FALSE .)
+    DIV             reduce using rule 65 (Expression -> FALSE .)
+    MOD             reduce using rule 65 (Expression -> FALSE .)
+    AND             reduce using rule 65 (Expression -> FALSE .)
+    OR              reduce using rule 65 (Expression -> FALSE .)
+    THEN            reduce using rule 65 (Expression -> FALSE .)
+    ;               reduce using rule 65 (Expression -> FALSE .)
+    ELSE            reduce using rule 65 (Expression -> FALSE .)
+    )               reduce using rule 65 (Expression -> FALSE .)
+    TO              reduce using rule 65 (Expression -> FALSE .)
+    DOWNTO          reduce using rule 65 (Expression -> FALSE .)
+    ]               reduce using rule 65 (Expression -> FALSE .)
+
+
+state 63
+
+    (66) Expression -> NOT . Expression
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 99
+
+state 64
+
+    (67) Expression -> LENGTH . ( identifier )
+
+    (               shift and go to state 100
+
+
+state 65
+
+    (72) If_Statement_Complete -> IF Expression . THEN Program_Line_No_Semi_Colon ELSE Program_Line_No_Semi_Colon
+    (73) If_Statement_Incomplete -> IF Expression . THEN Program_Line_No_Semi_Colon
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+    THEN            shift and go to state 101
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+
+state 66
+
+    (7) Var_Line -> Var_Names : Type . ;
+
+    ;               shift and go to state 102
+
+
+state 67
+
+    (8) Type -> INTEGER .
+
+    ;               reduce using rule 8 (Type -> INTEGER .)
+
+
+state 68
+
+    (9) Type -> STRING .
+
+    ;               reduce using rule 9 (Type -> STRING .)
+
+
+state 69
+
+    (10) Type -> BOOLEAN .
+
+    ;               reduce using rule 10 (Type -> BOOLEAN .)
+
+
+state 70
+
+    (11) Type -> ARRAY . [ number dotdot number ] OF Type
+
+    [               shift and go to state 103
+
+
+state 71
+
+    (12) Var_Names -> Var_Names , identifier .
+
+    :               reduce using rule 12 (Var_Names -> Var_Names , identifier .)
+    ,               reduce using rule 12 (Var_Names -> Var_Names , identifier .)
+
+
+state 72
+
+    (69) Block -> BEGIN Lines_Of_Code END .
+
+    ;               reduce using rule 69 (Block -> BEGIN Lines_Of_Code END .)
+    ELSE            reduce using rule 69 (Block -> BEGIN Lines_Of_Code END .)
+
+
+state 73
+
+    (14) Code -> BEGIN Lines_Of_Code END . .
+
+    $end            reduce using rule 14 (Code -> BEGIN Lines_Of_Code END . .)
+
+
+state 74
+
+    (37) Write_Line -> WRITELN ( Write_Args . )
+    (39) Write_Args -> Write_Args . , Write_Arg
+
+    )               shift and go to state 104
+    ,               shift and go to state 105
+
+
+state 75
+
+    (40) Write_Args -> Write_Arg .
+
+    )               reduce using rule 40 (Write_Args -> Write_Arg .)
+    ,               reduce using rule 40 (Write_Args -> Write_Arg .)
+
+
+state 76
+
+    (41) Write_Arg -> argument .
+
+    )               reduce using rule 41 (Write_Arg -> argument .)
+    ,               reduce using rule 41 (Write_Arg -> argument .)
+
+
+state 77
+
+    (42) Write_Arg -> identifier .
+
+    )               reduce using rule 42 (Write_Arg -> identifier .)
+    ,               reduce using rule 42 (Write_Arg -> identifier .)
+
+
+state 78
+
+    (38) Write_Line_No_ln -> WRITE ( Write_Args . )
+    (39) Write_Args -> Write_Args . , Write_Arg
+
+    )               shift and go to state 106
+    ,               shift and go to state 105
+
+
+state 79
+
+    (43) Read_Line -> READ ( identifier . )
+
+    )               shift and go to state 107
+
+
+state 80
+
+    (68) Assignment -> identifier assign Expression .
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+    ;               reduce using rule 68 (Assignment -> identifier assign Expression .)
+    ELSE            reduce using rule 68 (Assignment -> identifier assign Expression .)
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+
+state 81
+
+    (45) Read_Line -> READLN ( identifier . [ Expression ] )
+    (44) Read_Line_ln -> READLN ( identifier . )
+
+    [               shift and go to state 108
+    )               shift and go to state 109
+
+
+state 82
+
+    (74) For_Statement -> FOR identifier assign . Expression TO Expression DO Program_Line_No_Semi_Colon
+    (75) For_Statement -> FOR identifier assign . Expression DOWNTO Expression DO Program_Line_No_Semi_Colon
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 110
+
+state 83
+
+    (76) While_Statement -> WHILE Expression DO . Program_Line_No_Semi_Colon
+    (27) Program_Line_No_Semi_Colon -> . Write_Line
+    (28) Program_Line_No_Semi_Colon -> . Write_Line_No_ln
+    (29) Program_Line_No_Semi_Colon -> . Read_Line
+    (30) Program_Line_No_Semi_Colon -> . If_Statement_Complete
+    (31) Program_Line_No_Semi_Colon -> . If_Statement_Incomplete
+    (32) Program_Line_No_Semi_Colon -> . Assignment
+    (33) Program_Line_No_Semi_Colon -> . Read_Line_ln
+    (34) Program_Line_No_Semi_Colon -> . Block
+    (35) Program_Line_No_Semi_Colon -> . For_Statement
+    (36) Program_Line_No_Semi_Colon -> . While_Statement
+    (37) Write_Line -> . WRITELN ( Write_Args )
+    (38) Write_Line_No_ln -> . WRITE ( Write_Args )
+    (43) Read_Line -> . READ ( identifier )
+    (45) Read_Line -> . READLN ( identifier [ Expression ] )
+    (72) If_Statement_Complete -> . IF Expression THEN Program_Line_No_Semi_Colon ELSE Program_Line_No_Semi_Colon
+    (73) If_Statement_Incomplete -> . IF Expression THEN Program_Line_No_Semi_Colon
+    (68) Assignment -> . identifier assign Expression
+    (44) Read_Line_ln -> . READLN ( identifier )
+    (69) Block -> . BEGIN Lines_Of_Code END
+    (74) For_Statement -> . FOR identifier assign Expression TO Expression DO Program_Line_No_Semi_Colon
+    (75) For_Statement -> . FOR identifier assign Expression DOWNTO Expression DO Program_Line_No_Semi_Colon
+    (76) While_Statement -> . WHILE Expression DO Program_Line_No_Semi_Colon
+
+    WRITELN         shift and go to state 25
+    WRITE           shift and go to state 26
+    READ            shift and go to state 27
+    READLN          shift and go to state 29
+    IF              shift and go to state 34
+    identifier      shift and go to state 28
+    BEGIN           shift and go to state 13
+    FOR             shift and go to state 32
+    WHILE           shift and go to state 33
+
+    Program_Line_No_Semi_Colon     shift and go to state 111
+    Write_Line                     shift and go to state 112
+    Write_Line_No_ln               shift and go to state 113
+    Read_Line                      shift and go to state 114
+    If_Statement_Complete          shift and go to state 115
+    If_Statement_Incomplete        shift and go to state 116
+    Assignment                     shift and go to state 117
+    Read_Line_ln                   shift and go to state 118
+    Block                          shift and go to state 119
+    For_Statement                  shift and go to state 120
+    While_Statement                shift and go to state 121
+
+state 84
+
+    (46) Expression -> Expression + . Expression
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 122
+
+state 85
+
+    (47) Expression -> Expression - . Expression
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 123
+
+state 86
+
+    (48) Expression -> Expression * . Expression
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 124
+
+state 87
+
+    (49) Expression -> Expression / . Expression
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 125
+
+state 88
+
+    (50) Expression -> Expression > . Expression
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 126
+
+state 89
+
+    (51) Expression -> Expression < . Expression
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 127
+
+state 90
+
+    (52) Expression -> Expression = . Expression
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 128
+
+state 91
+
+    (53) Expression -> Expression lowerequal . Expression
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 129
+
+state 92
+
+    (54) Expression -> Expression greaterequal . Expression
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 130
+
+state 93
+
+    (55) Expression -> Expression DIV . Expression
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 131
+
+state 94
+
+    (56) Expression -> Expression MOD . Expression
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 132
+
+state 95
+
+    (57) Expression -> Expression AND . Expression
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 133
+
+state 96
+
+    (58) Expression -> Expression OR . Expression
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 134
+
+state 97
+
+    (59) Expression -> ( Expression . )
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+    )               shift and go to state 135
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+
+state 98
+
+    (61) Expression -> identifier [ . Expression ]
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 136
+
+state 99
+
+    (66) Expression -> NOT Expression .
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for lowerequal resolved as shift
+  ! shift/reduce conflict for greaterequal resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    DO              reduce using rule 66 (Expression -> NOT Expression .)
+    THEN            reduce using rule 66 (Expression -> NOT Expression .)
+    ;               reduce using rule 66 (Expression -> NOT Expression .)
+    ELSE            reduce using rule 66 (Expression -> NOT Expression .)
+    )               reduce using rule 66 (Expression -> NOT Expression .)
+    TO              reduce using rule 66 (Expression -> NOT Expression .)
+    DOWNTO          reduce using rule 66 (Expression -> NOT Expression .)
+    ]               reduce using rule 66 (Expression -> NOT Expression .)
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+  ! +               [ reduce using rule 66 (Expression -> NOT Expression .) ]
+  ! -               [ reduce using rule 66 (Expression -> NOT Expression .) ]
+  ! *               [ reduce using rule 66 (Expression -> NOT Expression .) ]
+  ! /               [ reduce using rule 66 (Expression -> NOT Expression .) ]
+  ! >               [ reduce using rule 66 (Expression -> NOT Expression .) ]
+  ! <               [ reduce using rule 66 (Expression -> NOT Expression .) ]
+  ! =               [ reduce using rule 66 (Expression -> NOT Expression .) ]
+  ! lowerequal      [ reduce using rule 66 (Expression -> NOT Expression .) ]
+  ! greaterequal    [ reduce using rule 66 (Expression -> NOT Expression .) ]
+  ! DIV             [ reduce using rule 66 (Expression -> NOT Expression .) ]
+  ! MOD             [ reduce using rule 66 (Expression -> NOT Expression .) ]
+  ! AND             [ reduce using rule 66 (Expression -> NOT Expression .) ]
+  ! OR              [ reduce using rule 66 (Expression -> NOT Expression .) ]
+
+
+state 100
+
+    (67) Expression -> LENGTH ( . identifier )
+
+    identifier      shift and go to state 137
+
+
+state 101
+
+    (72) If_Statement_Complete -> IF Expression THEN . Program_Line_No_Semi_Colon ELSE Program_Line_No_Semi_Colon
+    (73) If_Statement_Incomplete -> IF Expression THEN . Program_Line_No_Semi_Colon
+    (27) Program_Line_No_Semi_Colon -> . Write_Line
+    (28) Program_Line_No_Semi_Colon -> . Write_Line_No_ln
+    (29) Program_Line_No_Semi_Colon -> . Read_Line
+    (30) Program_Line_No_Semi_Colon -> . If_Statement_Complete
+    (31) Program_Line_No_Semi_Colon -> . If_Statement_Incomplete
+    (32) Program_Line_No_Semi_Colon -> . Assignment
+    (33) Program_Line_No_Semi_Colon -> . Read_Line_ln
+    (34) Program_Line_No_Semi_Colon -> . Block
+    (35) Program_Line_No_Semi_Colon -> . For_Statement
+    (36) Program_Line_No_Semi_Colon -> . While_Statement
+    (37) Write_Line -> . WRITELN ( Write_Args )
+    (38) Write_Line_No_ln -> . WRITE ( Write_Args )
+    (43) Read_Line -> . READ ( identifier )
+    (45) Read_Line -> . READLN ( identifier [ Expression ] )
+    (72) If_Statement_Complete -> . IF Expression THEN Program_Line_No_Semi_Colon ELSE Program_Line_No_Semi_Colon
+    (73) If_Statement_Incomplete -> . IF Expression THEN Program_Line_No_Semi_Colon
+    (68) Assignment -> . identifier assign Expression
+    (44) Read_Line_ln -> . READLN ( identifier )
+    (69) Block -> . BEGIN Lines_Of_Code END
+    (74) For_Statement -> . FOR identifier assign Expression TO Expression DO Program_Line_No_Semi_Colon
+    (75) For_Statement -> . FOR identifier assign Expression DOWNTO Expression DO Program_Line_No_Semi_Colon
+    (76) While_Statement -> . WHILE Expression DO Program_Line_No_Semi_Colon
+
+    WRITELN         shift and go to state 25
+    WRITE           shift and go to state 26
+    READ            shift and go to state 27
+    READLN          shift and go to state 29
+    IF              shift and go to state 34
+    identifier      shift and go to state 28
+    BEGIN           shift and go to state 13
+    FOR             shift and go to state 32
+    WHILE           shift and go to state 33
+
+    Program_Line_No_Semi_Colon     shift and go to state 138
+    Write_Line                     shift and go to state 112
+    Write_Line_No_ln               shift and go to state 113
+    Read_Line                      shift and go to state 114
+    If_Statement_Complete          shift and go to state 115
+    If_Statement_Incomplete        shift and go to state 116
+    Assignment                     shift and go to state 117
+    Read_Line_ln                   shift and go to state 118
+    Block                          shift and go to state 119
+    For_Statement                  shift and go to state 120
+    While_Statement                shift and go to state 121
+
+state 102
+
+    (7) Var_Line -> Var_Names : Type ; .
+
+    identifier      reduce using rule 7 (Var_Line -> Var_Names : Type ; .)
+    BEGIN           reduce using rule 7 (Var_Line -> Var_Names : Type ; .)
+
+
+state 103
+
+    (11) Type -> ARRAY [ . number dotdot number ] OF Type
+
+    number          shift and go to state 139
+
+
+state 104
+
+    (37) Write_Line -> WRITELN ( Write_Args ) .
+
+    ;               reduce using rule 37 (Write_Line -> WRITELN ( Write_Args ) .)
+    ELSE            reduce using rule 37 (Write_Line -> WRITELN ( Write_Args ) .)
+
+
+state 105
+
+    (39) Write_Args -> Write_Args , . Write_Arg
+    (41) Write_Arg -> . argument
+    (42) Write_Arg -> . identifier
+
+    argument        shift and go to state 76
+    identifier      shift and go to state 77
+
+    Write_Arg                      shift and go to state 140
+
+state 106
+
+    (38) Write_Line_No_ln -> WRITE ( Write_Args ) .
+
+    ;               reduce using rule 38 (Write_Line_No_ln -> WRITE ( Write_Args ) .)
+    ELSE            reduce using rule 38 (Write_Line_No_ln -> WRITE ( Write_Args ) .)
+
+
+state 107
+
+    (43) Read_Line -> READ ( identifier ) .
+
+    ;               reduce using rule 43 (Read_Line -> READ ( identifier ) .)
+    ELSE            reduce using rule 43 (Read_Line -> READ ( identifier ) .)
+
+
+state 108
+
+    (45) Read_Line -> READLN ( identifier [ . Expression ] )
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 141
+
+state 109
+
+    (44) Read_Line_ln -> READLN ( identifier ) .
+
+    ;               reduce using rule 44 (Read_Line_ln -> READLN ( identifier ) .)
+    ELSE            reduce using rule 44 (Read_Line_ln -> READLN ( identifier ) .)
+
+
+state 110
+
+    (74) For_Statement -> FOR identifier assign Expression . TO Expression DO Program_Line_No_Semi_Colon
+    (75) For_Statement -> FOR identifier assign Expression . DOWNTO Expression DO Program_Line_No_Semi_Colon
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+    TO              shift and go to state 142
+    DOWNTO          shift and go to state 143
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+
+state 111
+
+    (76) While_Statement -> WHILE Expression DO Program_Line_No_Semi_Colon .
+
+    ;               reduce using rule 76 (While_Statement -> WHILE Expression DO Program_Line_No_Semi_Colon .)
+    ELSE            reduce using rule 76 (While_Statement -> WHILE Expression DO Program_Line_No_Semi_Colon .)
+
+
+state 112
+
+    (27) Program_Line_No_Semi_Colon -> Write_Line .
+
+    ;               reduce using rule 27 (Program_Line_No_Semi_Colon -> Write_Line .)
+    ELSE            reduce using rule 27 (Program_Line_No_Semi_Colon -> Write_Line .)
+
+
+state 113
+
+    (28) Program_Line_No_Semi_Colon -> Write_Line_No_ln .
+
+    ;               reduce using rule 28 (Program_Line_No_Semi_Colon -> Write_Line_No_ln .)
+    ELSE            reduce using rule 28 (Program_Line_No_Semi_Colon -> Write_Line_No_ln .)
+
+
+state 114
+
+    (29) Program_Line_No_Semi_Colon -> Read_Line .
+
+    ;               reduce using rule 29 (Program_Line_No_Semi_Colon -> Read_Line .)
+    ELSE            reduce using rule 29 (Program_Line_No_Semi_Colon -> Read_Line .)
+
+
+state 115
+
+    (30) Program_Line_No_Semi_Colon -> If_Statement_Complete .
+
+    ;               reduce using rule 30 (Program_Line_No_Semi_Colon -> If_Statement_Complete .)
+    ELSE            reduce using rule 30 (Program_Line_No_Semi_Colon -> If_Statement_Complete .)
+
+
+state 116
+
+    (31) Program_Line_No_Semi_Colon -> If_Statement_Incomplete .
+
+    ;               reduce using rule 31 (Program_Line_No_Semi_Colon -> If_Statement_Incomplete .)
+    ELSE            reduce using rule 31 (Program_Line_No_Semi_Colon -> If_Statement_Incomplete .)
+
+
+state 117
+
+    (32) Program_Line_No_Semi_Colon -> Assignment .
+
+    ;               reduce using rule 32 (Program_Line_No_Semi_Colon -> Assignment .)
+    ELSE            reduce using rule 32 (Program_Line_No_Semi_Colon -> Assignment .)
+
+
+state 118
+
+    (33) Program_Line_No_Semi_Colon -> Read_Line_ln .
+
+    ;               reduce using rule 33 (Program_Line_No_Semi_Colon -> Read_Line_ln .)
+    ELSE            reduce using rule 33 (Program_Line_No_Semi_Colon -> Read_Line_ln .)
+
+
+state 119
+
+    (34) Program_Line_No_Semi_Colon -> Block .
+
+    ;               reduce using rule 34 (Program_Line_No_Semi_Colon -> Block .)
+    ELSE            reduce using rule 34 (Program_Line_No_Semi_Colon -> Block .)
+
+
+state 120
+
+    (35) Program_Line_No_Semi_Colon -> For_Statement .
+
+    ;               reduce using rule 35 (Program_Line_No_Semi_Colon -> For_Statement .)
+    ELSE            reduce using rule 35 (Program_Line_No_Semi_Colon -> For_Statement .)
+
+
+state 121
+
+    (36) Program_Line_No_Semi_Colon -> While_Statement .
+
+    ;               reduce using rule 36 (Program_Line_No_Semi_Colon -> While_Statement .)
+    ELSE            reduce using rule 36 (Program_Line_No_Semi_Colon -> While_Statement .)
+
+
+state 122
+
+    (46) Expression -> Expression + Expression .
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for lowerequal resolved as shift
+  ! shift/reduce conflict for greaterequal resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    DO              reduce using rule 46 (Expression -> Expression + Expression .)
+    THEN            reduce using rule 46 (Expression -> Expression + Expression .)
+    ;               reduce using rule 46 (Expression -> Expression + Expression .)
+    ELSE            reduce using rule 46 (Expression -> Expression + Expression .)
+    )               reduce using rule 46 (Expression -> Expression + Expression .)
+    TO              reduce using rule 46 (Expression -> Expression + Expression .)
+    DOWNTO          reduce using rule 46 (Expression -> Expression + Expression .)
+    ]               reduce using rule 46 (Expression -> Expression + Expression .)
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+  ! +               [ reduce using rule 46 (Expression -> Expression + Expression .) ]
+  ! -               [ reduce using rule 46 (Expression -> Expression + Expression .) ]
+  ! *               [ reduce using rule 46 (Expression -> Expression + Expression .) ]
+  ! /               [ reduce using rule 46 (Expression -> Expression + Expression .) ]
+  ! >               [ reduce using rule 46 (Expression -> Expression + Expression .) ]
+  ! <               [ reduce using rule 46 (Expression -> Expression + Expression .) ]
+  ! =               [ reduce using rule 46 (Expression -> Expression + Expression .) ]
+  ! lowerequal      [ reduce using rule 46 (Expression -> Expression + Expression .) ]
+  ! greaterequal    [ reduce using rule 46 (Expression -> Expression + Expression .) ]
+  ! DIV             [ reduce using rule 46 (Expression -> Expression + Expression .) ]
+  ! MOD             [ reduce using rule 46 (Expression -> Expression + Expression .) ]
+  ! AND             [ reduce using rule 46 (Expression -> Expression + Expression .) ]
+  ! OR              [ reduce using rule 46 (Expression -> Expression + Expression .) ]
+
+
+state 123
+
+    (47) Expression -> Expression - Expression .
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for lowerequal resolved as shift
+  ! shift/reduce conflict for greaterequal resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    DO              reduce using rule 47 (Expression -> Expression - Expression .)
+    THEN            reduce using rule 47 (Expression -> Expression - Expression .)
+    ;               reduce using rule 47 (Expression -> Expression - Expression .)
+    ELSE            reduce using rule 47 (Expression -> Expression - Expression .)
+    )               reduce using rule 47 (Expression -> Expression - Expression .)
+    TO              reduce using rule 47 (Expression -> Expression - Expression .)
+    DOWNTO          reduce using rule 47 (Expression -> Expression - Expression .)
+    ]               reduce using rule 47 (Expression -> Expression - Expression .)
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+  ! +               [ reduce using rule 47 (Expression -> Expression - Expression .) ]
+  ! -               [ reduce using rule 47 (Expression -> Expression - Expression .) ]
+  ! *               [ reduce using rule 47 (Expression -> Expression - Expression .) ]
+  ! /               [ reduce using rule 47 (Expression -> Expression - Expression .) ]
+  ! >               [ reduce using rule 47 (Expression -> Expression - Expression .) ]
+  ! <               [ reduce using rule 47 (Expression -> Expression - Expression .) ]
+  ! =               [ reduce using rule 47 (Expression -> Expression - Expression .) ]
+  ! lowerequal      [ reduce using rule 47 (Expression -> Expression - Expression .) ]
+  ! greaterequal    [ reduce using rule 47 (Expression -> Expression - Expression .) ]
+  ! DIV             [ reduce using rule 47 (Expression -> Expression - Expression .) ]
+  ! MOD             [ reduce using rule 47 (Expression -> Expression - Expression .) ]
+  ! AND             [ reduce using rule 47 (Expression -> Expression - Expression .) ]
+  ! OR              [ reduce using rule 47 (Expression -> Expression - Expression .) ]
+
+
+state 124
+
+    (48) Expression -> Expression * Expression .
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for lowerequal resolved as shift
+  ! shift/reduce conflict for greaterequal resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    DO              reduce using rule 48 (Expression -> Expression * Expression .)
+    THEN            reduce using rule 48 (Expression -> Expression * Expression .)
+    ;               reduce using rule 48 (Expression -> Expression * Expression .)
+    ELSE            reduce using rule 48 (Expression -> Expression * Expression .)
+    )               reduce using rule 48 (Expression -> Expression * Expression .)
+    TO              reduce using rule 48 (Expression -> Expression * Expression .)
+    DOWNTO          reduce using rule 48 (Expression -> Expression * Expression .)
+    ]               reduce using rule 48 (Expression -> Expression * Expression .)
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+  ! +               [ reduce using rule 48 (Expression -> Expression * Expression .) ]
+  ! -               [ reduce using rule 48 (Expression -> Expression * Expression .) ]
+  ! *               [ reduce using rule 48 (Expression -> Expression * Expression .) ]
+  ! /               [ reduce using rule 48 (Expression -> Expression * Expression .) ]
+  ! >               [ reduce using rule 48 (Expression -> Expression * Expression .) ]
+  ! <               [ reduce using rule 48 (Expression -> Expression * Expression .) ]
+  ! =               [ reduce using rule 48 (Expression -> Expression * Expression .) ]
+  ! lowerequal      [ reduce using rule 48 (Expression -> Expression * Expression .) ]
+  ! greaterequal    [ reduce using rule 48 (Expression -> Expression * Expression .) ]
+  ! DIV             [ reduce using rule 48 (Expression -> Expression * Expression .) ]
+  ! MOD             [ reduce using rule 48 (Expression -> Expression * Expression .) ]
+  ! AND             [ reduce using rule 48 (Expression -> Expression * Expression .) ]
+  ! OR              [ reduce using rule 48 (Expression -> Expression * Expression .) ]
+
+
+state 125
+
+    (49) Expression -> Expression / Expression .
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for lowerequal resolved as shift
+  ! shift/reduce conflict for greaterequal resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    DO              reduce using rule 49 (Expression -> Expression / Expression .)
+    THEN            reduce using rule 49 (Expression -> Expression / Expression .)
+    ;               reduce using rule 49 (Expression -> Expression / Expression .)
+    ELSE            reduce using rule 49 (Expression -> Expression / Expression .)
+    )               reduce using rule 49 (Expression -> Expression / Expression .)
+    TO              reduce using rule 49 (Expression -> Expression / Expression .)
+    DOWNTO          reduce using rule 49 (Expression -> Expression / Expression .)
+    ]               reduce using rule 49 (Expression -> Expression / Expression .)
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+  ! +               [ reduce using rule 49 (Expression -> Expression / Expression .) ]
+  ! -               [ reduce using rule 49 (Expression -> Expression / Expression .) ]
+  ! *               [ reduce using rule 49 (Expression -> Expression / Expression .) ]
+  ! /               [ reduce using rule 49 (Expression -> Expression / Expression .) ]
+  ! >               [ reduce using rule 49 (Expression -> Expression / Expression .) ]
+  ! <               [ reduce using rule 49 (Expression -> Expression / Expression .) ]
+  ! =               [ reduce using rule 49 (Expression -> Expression / Expression .) ]
+  ! lowerequal      [ reduce using rule 49 (Expression -> Expression / Expression .) ]
+  ! greaterequal    [ reduce using rule 49 (Expression -> Expression / Expression .) ]
+  ! DIV             [ reduce using rule 49 (Expression -> Expression / Expression .) ]
+  ! MOD             [ reduce using rule 49 (Expression -> Expression / Expression .) ]
+  ! AND             [ reduce using rule 49 (Expression -> Expression / Expression .) ]
+  ! OR              [ reduce using rule 49 (Expression -> Expression / Expression .) ]
+
+
+state 126
+
+    (50) Expression -> Expression > Expression .
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for lowerequal resolved as shift
+  ! shift/reduce conflict for greaterequal resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    DO              reduce using rule 50 (Expression -> Expression > Expression .)
+    THEN            reduce using rule 50 (Expression -> Expression > Expression .)
+    ;               reduce using rule 50 (Expression -> Expression > Expression .)
+    ELSE            reduce using rule 50 (Expression -> Expression > Expression .)
+    )               reduce using rule 50 (Expression -> Expression > Expression .)
+    TO              reduce using rule 50 (Expression -> Expression > Expression .)
+    DOWNTO          reduce using rule 50 (Expression -> Expression > Expression .)
+    ]               reduce using rule 50 (Expression -> Expression > Expression .)
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+  ! +               [ reduce using rule 50 (Expression -> Expression > Expression .) ]
+  ! -               [ reduce using rule 50 (Expression -> Expression > Expression .) ]
+  ! *               [ reduce using rule 50 (Expression -> Expression > Expression .) ]
+  ! /               [ reduce using rule 50 (Expression -> Expression > Expression .) ]
+  ! >               [ reduce using rule 50 (Expression -> Expression > Expression .) ]
+  ! <               [ reduce using rule 50 (Expression -> Expression > Expression .) ]
+  ! =               [ reduce using rule 50 (Expression -> Expression > Expression .) ]
+  ! lowerequal      [ reduce using rule 50 (Expression -> Expression > Expression .) ]
+  ! greaterequal    [ reduce using rule 50 (Expression -> Expression > Expression .) ]
+  ! DIV             [ reduce using rule 50 (Expression -> Expression > Expression .) ]
+  ! MOD             [ reduce using rule 50 (Expression -> Expression > Expression .) ]
+  ! AND             [ reduce using rule 50 (Expression -> Expression > Expression .) ]
+  ! OR              [ reduce using rule 50 (Expression -> Expression > Expression .) ]
+
+
+state 127
+
+    (51) Expression -> Expression < Expression .
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for lowerequal resolved as shift
+  ! shift/reduce conflict for greaterequal resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    DO              reduce using rule 51 (Expression -> Expression < Expression .)
+    THEN            reduce using rule 51 (Expression -> Expression < Expression .)
+    ;               reduce using rule 51 (Expression -> Expression < Expression .)
+    ELSE            reduce using rule 51 (Expression -> Expression < Expression .)
+    )               reduce using rule 51 (Expression -> Expression < Expression .)
+    TO              reduce using rule 51 (Expression -> Expression < Expression .)
+    DOWNTO          reduce using rule 51 (Expression -> Expression < Expression .)
+    ]               reduce using rule 51 (Expression -> Expression < Expression .)
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+  ! +               [ reduce using rule 51 (Expression -> Expression < Expression .) ]
+  ! -               [ reduce using rule 51 (Expression -> Expression < Expression .) ]
+  ! *               [ reduce using rule 51 (Expression -> Expression < Expression .) ]
+  ! /               [ reduce using rule 51 (Expression -> Expression < Expression .) ]
+  ! >               [ reduce using rule 51 (Expression -> Expression < Expression .) ]
+  ! <               [ reduce using rule 51 (Expression -> Expression < Expression .) ]
+  ! =               [ reduce using rule 51 (Expression -> Expression < Expression .) ]
+  ! lowerequal      [ reduce using rule 51 (Expression -> Expression < Expression .) ]
+  ! greaterequal    [ reduce using rule 51 (Expression -> Expression < Expression .) ]
+  ! DIV             [ reduce using rule 51 (Expression -> Expression < Expression .) ]
+  ! MOD             [ reduce using rule 51 (Expression -> Expression < Expression .) ]
+  ! AND             [ reduce using rule 51 (Expression -> Expression < Expression .) ]
+  ! OR              [ reduce using rule 51 (Expression -> Expression < Expression .) ]
+
+
+state 128
+
+    (52) Expression -> Expression = Expression .
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for lowerequal resolved as shift
+  ! shift/reduce conflict for greaterequal resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    DO              reduce using rule 52 (Expression -> Expression = Expression .)
+    THEN            reduce using rule 52 (Expression -> Expression = Expression .)
+    ;               reduce using rule 52 (Expression -> Expression = Expression .)
+    ELSE            reduce using rule 52 (Expression -> Expression = Expression .)
+    )               reduce using rule 52 (Expression -> Expression = Expression .)
+    TO              reduce using rule 52 (Expression -> Expression = Expression .)
+    DOWNTO          reduce using rule 52 (Expression -> Expression = Expression .)
+    ]               reduce using rule 52 (Expression -> Expression = Expression .)
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+  ! +               [ reduce using rule 52 (Expression -> Expression = Expression .) ]
+  ! -               [ reduce using rule 52 (Expression -> Expression = Expression .) ]
+  ! *               [ reduce using rule 52 (Expression -> Expression = Expression .) ]
+  ! /               [ reduce using rule 52 (Expression -> Expression = Expression .) ]
+  ! >               [ reduce using rule 52 (Expression -> Expression = Expression .) ]
+  ! <               [ reduce using rule 52 (Expression -> Expression = Expression .) ]
+  ! =               [ reduce using rule 52 (Expression -> Expression = Expression .) ]
+  ! lowerequal      [ reduce using rule 52 (Expression -> Expression = Expression .) ]
+  ! greaterequal    [ reduce using rule 52 (Expression -> Expression = Expression .) ]
+  ! DIV             [ reduce using rule 52 (Expression -> Expression = Expression .) ]
+  ! MOD             [ reduce using rule 52 (Expression -> Expression = Expression .) ]
+  ! AND             [ reduce using rule 52 (Expression -> Expression = Expression .) ]
+  ! OR              [ reduce using rule 52 (Expression -> Expression = Expression .) ]
+
+
+state 129
+
+    (53) Expression -> Expression lowerequal Expression .
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for lowerequal resolved as shift
+  ! shift/reduce conflict for greaterequal resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    DO              reduce using rule 53 (Expression -> Expression lowerequal Expression .)
+    THEN            reduce using rule 53 (Expression -> Expression lowerequal Expression .)
+    ;               reduce using rule 53 (Expression -> Expression lowerequal Expression .)
+    ELSE            reduce using rule 53 (Expression -> Expression lowerequal Expression .)
+    )               reduce using rule 53 (Expression -> Expression lowerequal Expression .)
+    TO              reduce using rule 53 (Expression -> Expression lowerequal Expression .)
+    DOWNTO          reduce using rule 53 (Expression -> Expression lowerequal Expression .)
+    ]               reduce using rule 53 (Expression -> Expression lowerequal Expression .)
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+  ! +               [ reduce using rule 53 (Expression -> Expression lowerequal Expression .) ]
+  ! -               [ reduce using rule 53 (Expression -> Expression lowerequal Expression .) ]
+  ! *               [ reduce using rule 53 (Expression -> Expression lowerequal Expression .) ]
+  ! /               [ reduce using rule 53 (Expression -> Expression lowerequal Expression .) ]
+  ! >               [ reduce using rule 53 (Expression -> Expression lowerequal Expression .) ]
+  ! <               [ reduce using rule 53 (Expression -> Expression lowerequal Expression .) ]
+  ! =               [ reduce using rule 53 (Expression -> Expression lowerequal Expression .) ]
+  ! lowerequal      [ reduce using rule 53 (Expression -> Expression lowerequal Expression .) ]
+  ! greaterequal    [ reduce using rule 53 (Expression -> Expression lowerequal Expression .) ]
+  ! DIV             [ reduce using rule 53 (Expression -> Expression lowerequal Expression .) ]
+  ! MOD             [ reduce using rule 53 (Expression -> Expression lowerequal Expression .) ]
+  ! AND             [ reduce using rule 53 (Expression -> Expression lowerequal Expression .) ]
+  ! OR              [ reduce using rule 53 (Expression -> Expression lowerequal Expression .) ]
+
+
+state 130
+
+    (54) Expression -> Expression greaterequal Expression .
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for lowerequal resolved as shift
+  ! shift/reduce conflict for greaterequal resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    DO              reduce using rule 54 (Expression -> Expression greaterequal Expression .)
+    THEN            reduce using rule 54 (Expression -> Expression greaterequal Expression .)
+    ;               reduce using rule 54 (Expression -> Expression greaterequal Expression .)
+    ELSE            reduce using rule 54 (Expression -> Expression greaterequal Expression .)
+    )               reduce using rule 54 (Expression -> Expression greaterequal Expression .)
+    TO              reduce using rule 54 (Expression -> Expression greaterequal Expression .)
+    DOWNTO          reduce using rule 54 (Expression -> Expression greaterequal Expression .)
+    ]               reduce using rule 54 (Expression -> Expression greaterequal Expression .)
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+  ! +               [ reduce using rule 54 (Expression -> Expression greaterequal Expression .) ]
+  ! -               [ reduce using rule 54 (Expression -> Expression greaterequal Expression .) ]
+  ! *               [ reduce using rule 54 (Expression -> Expression greaterequal Expression .) ]
+  ! /               [ reduce using rule 54 (Expression -> Expression greaterequal Expression .) ]
+  ! >               [ reduce using rule 54 (Expression -> Expression greaterequal Expression .) ]
+  ! <               [ reduce using rule 54 (Expression -> Expression greaterequal Expression .) ]
+  ! =               [ reduce using rule 54 (Expression -> Expression greaterequal Expression .) ]
+  ! lowerequal      [ reduce using rule 54 (Expression -> Expression greaterequal Expression .) ]
+  ! greaterequal    [ reduce using rule 54 (Expression -> Expression greaterequal Expression .) ]
+  ! DIV             [ reduce using rule 54 (Expression -> Expression greaterequal Expression .) ]
+  ! MOD             [ reduce using rule 54 (Expression -> Expression greaterequal Expression .) ]
+  ! AND             [ reduce using rule 54 (Expression -> Expression greaterequal Expression .) ]
+  ! OR              [ reduce using rule 54 (Expression -> Expression greaterequal Expression .) ]
+
+
+state 131
+
+    (55) Expression -> Expression DIV Expression .
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for lowerequal resolved as shift
+  ! shift/reduce conflict for greaterequal resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    DO              reduce using rule 55 (Expression -> Expression DIV Expression .)
+    THEN            reduce using rule 55 (Expression -> Expression DIV Expression .)
+    ;               reduce using rule 55 (Expression -> Expression DIV Expression .)
+    ELSE            reduce using rule 55 (Expression -> Expression DIV Expression .)
+    )               reduce using rule 55 (Expression -> Expression DIV Expression .)
+    TO              reduce using rule 55 (Expression -> Expression DIV Expression .)
+    DOWNTO          reduce using rule 55 (Expression -> Expression DIV Expression .)
+    ]               reduce using rule 55 (Expression -> Expression DIV Expression .)
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+  ! +               [ reduce using rule 55 (Expression -> Expression DIV Expression .) ]
+  ! -               [ reduce using rule 55 (Expression -> Expression DIV Expression .) ]
+  ! *               [ reduce using rule 55 (Expression -> Expression DIV Expression .) ]
+  ! /               [ reduce using rule 55 (Expression -> Expression DIV Expression .) ]
+  ! >               [ reduce using rule 55 (Expression -> Expression DIV Expression .) ]
+  ! <               [ reduce using rule 55 (Expression -> Expression DIV Expression .) ]
+  ! =               [ reduce using rule 55 (Expression -> Expression DIV Expression .) ]
+  ! lowerequal      [ reduce using rule 55 (Expression -> Expression DIV Expression .) ]
+  ! greaterequal    [ reduce using rule 55 (Expression -> Expression DIV Expression .) ]
+  ! DIV             [ reduce using rule 55 (Expression -> Expression DIV Expression .) ]
+  ! MOD             [ reduce using rule 55 (Expression -> Expression DIV Expression .) ]
+  ! AND             [ reduce using rule 55 (Expression -> Expression DIV Expression .) ]
+  ! OR              [ reduce using rule 55 (Expression -> Expression DIV Expression .) ]
+
+
+state 132
+
+    (56) Expression -> Expression MOD Expression .
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for lowerequal resolved as shift
+  ! shift/reduce conflict for greaterequal resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    DO              reduce using rule 56 (Expression -> Expression MOD Expression .)
+    THEN            reduce using rule 56 (Expression -> Expression MOD Expression .)
+    ;               reduce using rule 56 (Expression -> Expression MOD Expression .)
+    ELSE            reduce using rule 56 (Expression -> Expression MOD Expression .)
+    )               reduce using rule 56 (Expression -> Expression MOD Expression .)
+    TO              reduce using rule 56 (Expression -> Expression MOD Expression .)
+    DOWNTO          reduce using rule 56 (Expression -> Expression MOD Expression .)
+    ]               reduce using rule 56 (Expression -> Expression MOD Expression .)
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+  ! +               [ reduce using rule 56 (Expression -> Expression MOD Expression .) ]
+  ! -               [ reduce using rule 56 (Expression -> Expression MOD Expression .) ]
+  ! *               [ reduce using rule 56 (Expression -> Expression MOD Expression .) ]
+  ! /               [ reduce using rule 56 (Expression -> Expression MOD Expression .) ]
+  ! >               [ reduce using rule 56 (Expression -> Expression MOD Expression .) ]
+  ! <               [ reduce using rule 56 (Expression -> Expression MOD Expression .) ]
+  ! =               [ reduce using rule 56 (Expression -> Expression MOD Expression .) ]
+  ! lowerequal      [ reduce using rule 56 (Expression -> Expression MOD Expression .) ]
+  ! greaterequal    [ reduce using rule 56 (Expression -> Expression MOD Expression .) ]
+  ! DIV             [ reduce using rule 56 (Expression -> Expression MOD Expression .) ]
+  ! MOD             [ reduce using rule 56 (Expression -> Expression MOD Expression .) ]
+  ! AND             [ reduce using rule 56 (Expression -> Expression MOD Expression .) ]
+  ! OR              [ reduce using rule 56 (Expression -> Expression MOD Expression .) ]
+
+
+state 133
+
+    (57) Expression -> Expression AND Expression .
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for lowerequal resolved as shift
+  ! shift/reduce conflict for greaterequal resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    DO              reduce using rule 57 (Expression -> Expression AND Expression .)
+    THEN            reduce using rule 57 (Expression -> Expression AND Expression .)
+    ;               reduce using rule 57 (Expression -> Expression AND Expression .)
+    ELSE            reduce using rule 57 (Expression -> Expression AND Expression .)
+    )               reduce using rule 57 (Expression -> Expression AND Expression .)
+    TO              reduce using rule 57 (Expression -> Expression AND Expression .)
+    DOWNTO          reduce using rule 57 (Expression -> Expression AND Expression .)
+    ]               reduce using rule 57 (Expression -> Expression AND Expression .)
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+  ! +               [ reduce using rule 57 (Expression -> Expression AND Expression .) ]
+  ! -               [ reduce using rule 57 (Expression -> Expression AND Expression .) ]
+  ! *               [ reduce using rule 57 (Expression -> Expression AND Expression .) ]
+  ! /               [ reduce using rule 57 (Expression -> Expression AND Expression .) ]
+  ! >               [ reduce using rule 57 (Expression -> Expression AND Expression .) ]
+  ! <               [ reduce using rule 57 (Expression -> Expression AND Expression .) ]
+  ! =               [ reduce using rule 57 (Expression -> Expression AND Expression .) ]
+  ! lowerequal      [ reduce using rule 57 (Expression -> Expression AND Expression .) ]
+  ! greaterequal    [ reduce using rule 57 (Expression -> Expression AND Expression .) ]
+  ! DIV             [ reduce using rule 57 (Expression -> Expression AND Expression .) ]
+  ! MOD             [ reduce using rule 57 (Expression -> Expression AND Expression .) ]
+  ! AND             [ reduce using rule 57 (Expression -> Expression AND Expression .) ]
+  ! OR              [ reduce using rule 57 (Expression -> Expression AND Expression .) ]
+
+
+state 134
+
+    (58) Expression -> Expression OR Expression .
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+  ! shift/reduce conflict for + resolved as shift
+  ! shift/reduce conflict for - resolved as shift
+  ! shift/reduce conflict for * resolved as shift
+  ! shift/reduce conflict for / resolved as shift
+  ! shift/reduce conflict for > resolved as shift
+  ! shift/reduce conflict for < resolved as shift
+  ! shift/reduce conflict for = resolved as shift
+  ! shift/reduce conflict for lowerequal resolved as shift
+  ! shift/reduce conflict for greaterequal resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    DO              reduce using rule 58 (Expression -> Expression OR Expression .)
+    THEN            reduce using rule 58 (Expression -> Expression OR Expression .)
+    ;               reduce using rule 58 (Expression -> Expression OR Expression .)
+    ELSE            reduce using rule 58 (Expression -> Expression OR Expression .)
+    )               reduce using rule 58 (Expression -> Expression OR Expression .)
+    TO              reduce using rule 58 (Expression -> Expression OR Expression .)
+    DOWNTO          reduce using rule 58 (Expression -> Expression OR Expression .)
+    ]               reduce using rule 58 (Expression -> Expression OR Expression .)
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+  ! +               [ reduce using rule 58 (Expression -> Expression OR Expression .) ]
+  ! -               [ reduce using rule 58 (Expression -> Expression OR Expression .) ]
+  ! *               [ reduce using rule 58 (Expression -> Expression OR Expression .) ]
+  ! /               [ reduce using rule 58 (Expression -> Expression OR Expression .) ]
+  ! >               [ reduce using rule 58 (Expression -> Expression OR Expression .) ]
+  ! <               [ reduce using rule 58 (Expression -> Expression OR Expression .) ]
+  ! =               [ reduce using rule 58 (Expression -> Expression OR Expression .) ]
+  ! lowerequal      [ reduce using rule 58 (Expression -> Expression OR Expression .) ]
+  ! greaterequal    [ reduce using rule 58 (Expression -> Expression OR Expression .) ]
+  ! DIV             [ reduce using rule 58 (Expression -> Expression OR Expression .) ]
+  ! MOD             [ reduce using rule 58 (Expression -> Expression OR Expression .) ]
+  ! AND             [ reduce using rule 58 (Expression -> Expression OR Expression .) ]
+  ! OR              [ reduce using rule 58 (Expression -> Expression OR Expression .) ]
+
+
+state 135
+
+    (59) Expression -> ( Expression ) .
+
+    DO              reduce using rule 59 (Expression -> ( Expression ) .)
+    +               reduce using rule 59 (Expression -> ( Expression ) .)
+    -               reduce using rule 59 (Expression -> ( Expression ) .)
+    *               reduce using rule 59 (Expression -> ( Expression ) .)
+    /               reduce using rule 59 (Expression -> ( Expression ) .)
+    >               reduce using rule 59 (Expression -> ( Expression ) .)
+    <               reduce using rule 59 (Expression -> ( Expression ) .)
+    =               reduce using rule 59 (Expression -> ( Expression ) .)
+    lowerequal      reduce using rule 59 (Expression -> ( Expression ) .)
+    greaterequal    reduce using rule 59 (Expression -> ( Expression ) .)
+    DIV             reduce using rule 59 (Expression -> ( Expression ) .)
+    MOD             reduce using rule 59 (Expression -> ( Expression ) .)
+    AND             reduce using rule 59 (Expression -> ( Expression ) .)
+    OR              reduce using rule 59 (Expression -> ( Expression ) .)
+    THEN            reduce using rule 59 (Expression -> ( Expression ) .)
+    ;               reduce using rule 59 (Expression -> ( Expression ) .)
+    ELSE            reduce using rule 59 (Expression -> ( Expression ) .)
+    )               reduce using rule 59 (Expression -> ( Expression ) .)
+    TO              reduce using rule 59 (Expression -> ( Expression ) .)
+    DOWNTO          reduce using rule 59 (Expression -> ( Expression ) .)
+    ]               reduce using rule 59 (Expression -> ( Expression ) .)
+
+
+state 136
+
+    (61) Expression -> identifier [ Expression . ]
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+    ]               shift and go to state 144
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+
+state 137
+
+    (67) Expression -> LENGTH ( identifier . )
+
+    )               shift and go to state 145
+
+
+state 138
+
+    (72) If_Statement_Complete -> IF Expression THEN Program_Line_No_Semi_Colon . ELSE Program_Line_No_Semi_Colon
+    (73) If_Statement_Incomplete -> IF Expression THEN Program_Line_No_Semi_Colon .
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    ELSE            shift and go to state 146
+    ;               reduce using rule 73 (If_Statement_Incomplete -> IF Expression THEN Program_Line_No_Semi_Colon .)
+
+  ! ELSE            [ reduce using rule 73 (If_Statement_Incomplete -> IF Expression THEN Program_Line_No_Semi_Colon .) ]
+
+
+state 139
+
+    (11) Type -> ARRAY [ number . dotdot number ] OF Type
+
+    dotdot          shift and go to state 147
+
+
+state 140
+
+    (39) Write_Args -> Write_Args , Write_Arg .
+
+    )               reduce using rule 39 (Write_Args -> Write_Args , Write_Arg .)
+    ,               reduce using rule 39 (Write_Args -> Write_Args , Write_Arg .)
+
+
+state 141
+
+    (45) Read_Line -> READLN ( identifier [ Expression . ] )
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+    ]               shift and go to state 148
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+
+state 142
+
+    (74) For_Statement -> FOR identifier assign Expression TO . Expression DO Program_Line_No_Semi_Colon
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 149
+
+state 143
+
+    (75) For_Statement -> FOR identifier assign Expression DOWNTO . Expression DO Program_Line_No_Semi_Colon
+    (46) Expression -> . Expression + Expression
+    (47) Expression -> . Expression - Expression
+    (48) Expression -> . Expression * Expression
+    (49) Expression -> . Expression / Expression
+    (50) Expression -> . Expression > Expression
+    (51) Expression -> . Expression < Expression
+    (52) Expression -> . Expression = Expression
+    (53) Expression -> . Expression lowerequal Expression
+    (54) Expression -> . Expression greaterequal Expression
+    (55) Expression -> . Expression DIV Expression
+    (56) Expression -> . Expression MOD Expression
+    (57) Expression -> . Expression AND Expression
+    (58) Expression -> . Expression OR Expression
+    (59) Expression -> . ( Expression )
+    (60) Expression -> . identifier
+    (61) Expression -> . identifier [ Expression ]
+    (62) Expression -> . number
+    (63) Expression -> . argument
+    (64) Expression -> . TRUE
+    (65) Expression -> . FALSE
+    (66) Expression -> . NOT Expression
+    (67) Expression -> . LENGTH ( identifier )
+
+    (               shift and go to state 57
+    identifier      shift and go to state 58
+    number          shift and go to state 59
+    argument        shift and go to state 60
+    TRUE            shift and go to state 61
+    FALSE           shift and go to state 62
+    NOT             shift and go to state 63
+    LENGTH          shift and go to state 64
+
+    Expression                     shift and go to state 150
+
+state 144
+
+    (61) Expression -> identifier [ Expression ] .
+
+    DO              reduce using rule 61 (Expression -> identifier [ Expression ] .)
+    +               reduce using rule 61 (Expression -> identifier [ Expression ] .)
+    -               reduce using rule 61 (Expression -> identifier [ Expression ] .)
+    *               reduce using rule 61 (Expression -> identifier [ Expression ] .)
+    /               reduce using rule 61 (Expression -> identifier [ Expression ] .)
+    >               reduce using rule 61 (Expression -> identifier [ Expression ] .)
+    <               reduce using rule 61 (Expression -> identifier [ Expression ] .)
+    =               reduce using rule 61 (Expression -> identifier [ Expression ] .)
+    lowerequal      reduce using rule 61 (Expression -> identifier [ Expression ] .)
+    greaterequal    reduce using rule 61 (Expression -> identifier [ Expression ] .)
+    DIV             reduce using rule 61 (Expression -> identifier [ Expression ] .)
+    MOD             reduce using rule 61 (Expression -> identifier [ Expression ] .)
+    AND             reduce using rule 61 (Expression -> identifier [ Expression ] .)
+    OR              reduce using rule 61 (Expression -> identifier [ Expression ] .)
+    THEN            reduce using rule 61 (Expression -> identifier [ Expression ] .)
+    ;               reduce using rule 61 (Expression -> identifier [ Expression ] .)
+    ELSE            reduce using rule 61 (Expression -> identifier [ Expression ] .)
+    )               reduce using rule 61 (Expression -> identifier [ Expression ] .)
+    TO              reduce using rule 61 (Expression -> identifier [ Expression ] .)
+    DOWNTO          reduce using rule 61 (Expression -> identifier [ Expression ] .)
+    ]               reduce using rule 61 (Expression -> identifier [ Expression ] .)
+
+
+state 145
+
+    (67) Expression -> LENGTH ( identifier ) .
+
+    DO              reduce using rule 67 (Expression -> LENGTH ( identifier ) .)
+    +               reduce using rule 67 (Expression -> LENGTH ( identifier ) .)
+    -               reduce using rule 67 (Expression -> LENGTH ( identifier ) .)
+    *               reduce using rule 67 (Expression -> LENGTH ( identifier ) .)
+    /               reduce using rule 67 (Expression -> LENGTH ( identifier ) .)
+    >               reduce using rule 67 (Expression -> LENGTH ( identifier ) .)
+    <               reduce using rule 67 (Expression -> LENGTH ( identifier ) .)
+    =               reduce using rule 67 (Expression -> LENGTH ( identifier ) .)
+    lowerequal      reduce using rule 67 (Expression -> LENGTH ( identifier ) .)
+    greaterequal    reduce using rule 67 (Expression -> LENGTH ( identifier ) .)
+    DIV             reduce using rule 67 (Expression -> LENGTH ( identifier ) .)
+    MOD             reduce using rule 67 (Expression -> LENGTH ( identifier ) .)
+    AND             reduce using rule 67 (Expression -> LENGTH ( identifier ) .)
+    OR              reduce using rule 67 (Expression -> LENGTH ( identifier ) .)
+    THEN            reduce using rule 67 (Expression -> LENGTH ( identifier ) .)
+    ;               reduce using rule 67 (Expression -> LENGTH ( identifier ) .)
+    ELSE            reduce using rule 67 (Expression -> LENGTH ( identifier ) .)
+    )               reduce using rule 67 (Expression -> LENGTH ( identifier ) .)
+    TO              reduce using rule 67 (Expression -> LENGTH ( identifier ) .)
+    DOWNTO          reduce using rule 67 (Expression -> LENGTH ( identifier ) .)
+    ]               reduce using rule 67 (Expression -> LENGTH ( identifier ) .)
+
+
+state 146
+
+    (72) If_Statement_Complete -> IF Expression THEN Program_Line_No_Semi_Colon ELSE . Program_Line_No_Semi_Colon
+    (27) Program_Line_No_Semi_Colon -> . Write_Line
+    (28) Program_Line_No_Semi_Colon -> . Write_Line_No_ln
+    (29) Program_Line_No_Semi_Colon -> . Read_Line
+    (30) Program_Line_No_Semi_Colon -> . If_Statement_Complete
+    (31) Program_Line_No_Semi_Colon -> . If_Statement_Incomplete
+    (32) Program_Line_No_Semi_Colon -> . Assignment
+    (33) Program_Line_No_Semi_Colon -> . Read_Line_ln
+    (34) Program_Line_No_Semi_Colon -> . Block
+    (35) Program_Line_No_Semi_Colon -> . For_Statement
+    (36) Program_Line_No_Semi_Colon -> . While_Statement
+    (37) Write_Line -> . WRITELN ( Write_Args )
+    (38) Write_Line_No_ln -> . WRITE ( Write_Args )
+    (43) Read_Line -> . READ ( identifier )
+    (45) Read_Line -> . READLN ( identifier [ Expression ] )
+    (72) If_Statement_Complete -> . IF Expression THEN Program_Line_No_Semi_Colon ELSE Program_Line_No_Semi_Colon
+    (73) If_Statement_Incomplete -> . IF Expression THEN Program_Line_No_Semi_Colon
+    (68) Assignment -> . identifier assign Expression
+    (44) Read_Line_ln -> . READLN ( identifier )
+    (69) Block -> . BEGIN Lines_Of_Code END
+    (74) For_Statement -> . FOR identifier assign Expression TO Expression DO Program_Line_No_Semi_Colon
+    (75) For_Statement -> . FOR identifier assign Expression DOWNTO Expression DO Program_Line_No_Semi_Colon
+    (76) While_Statement -> . WHILE Expression DO Program_Line_No_Semi_Colon
+
+    WRITELN         shift and go to state 25
+    WRITE           shift and go to state 26
+    READ            shift and go to state 27
+    READLN          shift and go to state 29
+    IF              shift and go to state 34
+    identifier      shift and go to state 28
+    BEGIN           shift and go to state 13
+    FOR             shift and go to state 32
+    WHILE           shift and go to state 33
+
+    Program_Line_No_Semi_Colon     shift and go to state 151
+    Write_Line                     shift and go to state 112
+    Write_Line_No_ln               shift and go to state 113
+    Read_Line                      shift and go to state 114
+    If_Statement_Complete          shift and go to state 115
+    If_Statement_Incomplete        shift and go to state 116
+    Assignment                     shift and go to state 117
+    Read_Line_ln                   shift and go to state 118
+    Block                          shift and go to state 119
+    For_Statement                  shift and go to state 120
+    While_Statement                shift and go to state 121
+
+state 147
+
+    (11) Type -> ARRAY [ number dotdot . number ] OF Type
+
+    number          shift and go to state 152
+
+
+state 148
+
+    (45) Read_Line -> READLN ( identifier [ Expression ] . )
+
+    )               shift and go to state 153
+
+
+state 149
+
+    (74) For_Statement -> FOR identifier assign Expression TO Expression . DO Program_Line_No_Semi_Colon
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+    DO              shift and go to state 154
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+
+state 150
+
+    (75) For_Statement -> FOR identifier assign Expression DOWNTO Expression . DO Program_Line_No_Semi_Colon
+    (46) Expression -> Expression . + Expression
+    (47) Expression -> Expression . - Expression
+    (48) Expression -> Expression . * Expression
+    (49) Expression -> Expression . / Expression
+    (50) Expression -> Expression . > Expression
+    (51) Expression -> Expression . < Expression
+    (52) Expression -> Expression . = Expression
+    (53) Expression -> Expression . lowerequal Expression
+    (54) Expression -> Expression . greaterequal Expression
+    (55) Expression -> Expression . DIV Expression
+    (56) Expression -> Expression . MOD Expression
+    (57) Expression -> Expression . AND Expression
+    (58) Expression -> Expression . OR Expression
+
+    DO              shift and go to state 155
+    +               shift and go to state 84
+    -               shift and go to state 85
+    *               shift and go to state 86
+    /               shift and go to state 87
+    >               shift and go to state 88
+    <               shift and go to state 89
+    =               shift and go to state 90
+    lowerequal      shift and go to state 91
+    greaterequal    shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             shift and go to state 95
+    OR              shift and go to state 96
+
+
+state 151
+
+    (72) If_Statement_Complete -> IF Expression THEN Program_Line_No_Semi_Colon ELSE Program_Line_No_Semi_Colon .
+
+    ;               reduce using rule 72 (If_Statement_Complete -> IF Expression THEN Program_Line_No_Semi_Colon ELSE Program_Line_No_Semi_Colon .)
+    ELSE            reduce using rule 72 (If_Statement_Complete -> IF Expression THEN Program_Line_No_Semi_Colon ELSE Program_Line_No_Semi_Colon .)
+
+
+state 152
+
+    (11) Type -> ARRAY [ number dotdot number . ] OF Type
+
+    ]               shift and go to state 156
+
+
+state 153
+
+    (45) Read_Line -> READLN ( identifier [ Expression ] ) .
+
+    ;               reduce using rule 45 (Read_Line -> READLN ( identifier [ Expression ] ) .)
+    ELSE            reduce using rule 45 (Read_Line -> READLN ( identifier [ Expression ] ) .)
+
+
+state 154
+
+    (74) For_Statement -> FOR identifier assign Expression TO Expression DO . Program_Line_No_Semi_Colon
+    (27) Program_Line_No_Semi_Colon -> . Write_Line
+    (28) Program_Line_No_Semi_Colon -> . Write_Line_No_ln
+    (29) Program_Line_No_Semi_Colon -> . Read_Line
+    (30) Program_Line_No_Semi_Colon -> . If_Statement_Complete
+    (31) Program_Line_No_Semi_Colon -> . If_Statement_Incomplete
+    (32) Program_Line_No_Semi_Colon -> . Assignment
+    (33) Program_Line_No_Semi_Colon -> . Read_Line_ln
+    (34) Program_Line_No_Semi_Colon -> . Block
+    (35) Program_Line_No_Semi_Colon -> . For_Statement
+    (36) Program_Line_No_Semi_Colon -> . While_Statement
+    (37) Write_Line -> . WRITELN ( Write_Args )
+    (38) Write_Line_No_ln -> . WRITE ( Write_Args )
+    (43) Read_Line -> . READ ( identifier )
+    (45) Read_Line -> . READLN ( identifier [ Expression ] )
+    (72) If_Statement_Complete -> . IF Expression THEN Program_Line_No_Semi_Colon ELSE Program_Line_No_Semi_Colon
+    (73) If_Statement_Incomplete -> . IF Expression THEN Program_Line_No_Semi_Colon
+    (68) Assignment -> . identifier assign Expression
+    (44) Read_Line_ln -> . READLN ( identifier )
+    (69) Block -> . BEGIN Lines_Of_Code END
+    (74) For_Statement -> . FOR identifier assign Expression TO Expression DO Program_Line_No_Semi_Colon
+    (75) For_Statement -> . FOR identifier assign Expression DOWNTO Expression DO Program_Line_No_Semi_Colon
+    (76) While_Statement -> . WHILE Expression DO Program_Line_No_Semi_Colon
+
+    WRITELN         shift and go to state 25
+    WRITE           shift and go to state 26
+    READ            shift and go to state 27
+    READLN          shift and go to state 29
+    IF              shift and go to state 34
+    identifier      shift and go to state 28
+    BEGIN           shift and go to state 13
+    FOR             shift and go to state 32
+    WHILE           shift and go to state 33
+
+    Program_Line_No_Semi_Colon     shift and go to state 157
+    Write_Line                     shift and go to state 112
+    Write_Line_No_ln               shift and go to state 113
+    Read_Line                      shift and go to state 114
+    If_Statement_Complete          shift and go to state 115
+    If_Statement_Incomplete        shift and go to state 116
+    Assignment                     shift and go to state 117
+    Read_Line_ln                   shift and go to state 118
+    Block                          shift and go to state 119
+    For_Statement                  shift and go to state 120
+    While_Statement                shift and go to state 121
+
+state 155
+
+    (75) For_Statement -> FOR identifier assign Expression DOWNTO Expression DO . Program_Line_No_Semi_Colon
+    (27) Program_Line_No_Semi_Colon -> . Write_Line
+    (28) Program_Line_No_Semi_Colon -> . Write_Line_No_ln
+    (29) Program_Line_No_Semi_Colon -> . Read_Line
+    (30) Program_Line_No_Semi_Colon -> . If_Statement_Complete
+    (31) Program_Line_No_Semi_Colon -> . If_Statement_Incomplete
+    (32) Program_Line_No_Semi_Colon -> . Assignment
+    (33) Program_Line_No_Semi_Colon -> . Read_Line_ln
+    (34) Program_Line_No_Semi_Colon -> . Block
+    (35) Program_Line_No_Semi_Colon -> . For_Statement
+    (36) Program_Line_No_Semi_Colon -> . While_Statement
+    (37) Write_Line -> . WRITELN ( Write_Args )
+    (38) Write_Line_No_ln -> . WRITE ( Write_Args )
+    (43) Read_Line -> . READ ( identifier )
+    (45) Read_Line -> . READLN ( identifier [ Expression ] )
+    (72) If_Statement_Complete -> . IF Expression THEN Program_Line_No_Semi_Colon ELSE Program_Line_No_Semi_Colon
+    (73) If_Statement_Incomplete -> . IF Expression THEN Program_Line_No_Semi_Colon
+    (68) Assignment -> . identifier assign Expression
+    (44) Read_Line_ln -> . READLN ( identifier )
+    (69) Block -> . BEGIN Lines_Of_Code END
+    (74) For_Statement -> . FOR identifier assign Expression TO Expression DO Program_Line_No_Semi_Colon
+    (75) For_Statement -> . FOR identifier assign Expression DOWNTO Expression DO Program_Line_No_Semi_Colon
+    (76) While_Statement -> . WHILE Expression DO Program_Line_No_Semi_Colon
+
+    WRITELN         shift and go to state 25
+    WRITE           shift and go to state 26
+    READ            shift and go to state 27
+    READLN          shift and go to state 29
+    IF              shift and go to state 34
+    identifier      shift and go to state 28
+    BEGIN           shift and go to state 13
+    FOR             shift and go to state 32
+    WHILE           shift and go to state 33
+
+    Program_Line_No_Semi_Colon     shift and go to state 158
+    Write_Line                     shift and go to state 112
+    Write_Line_No_ln               shift and go to state 113
+    Read_Line                      shift and go to state 114
+    If_Statement_Complete          shift and go to state 115
+    If_Statement_Incomplete        shift and go to state 116
+    Assignment                     shift and go to state 117
+    Read_Line_ln                   shift and go to state 118
+    Block                          shift and go to state 119
+    For_Statement                  shift and go to state 120
+    While_Statement                shift and go to state 121
+
+state 156
+
+    (11) Type -> ARRAY [ number dotdot number ] . OF Type
+
+    OF              shift and go to state 159
+
+
+state 157
+
+    (74) For_Statement -> FOR identifier assign Expression TO Expression DO Program_Line_No_Semi_Colon .
+
+    ;               reduce using rule 74 (For_Statement -> FOR identifier assign Expression TO Expression DO Program_Line_No_Semi_Colon .)
+    ELSE            reduce using rule 74 (For_Statement -> FOR identifier assign Expression TO Expression DO Program_Line_No_Semi_Colon .)
+
+
+state 158
+
+    (75) For_Statement -> FOR identifier assign Expression DOWNTO Expression DO Program_Line_No_Semi_Colon .
+
+    ;               reduce using rule 75 (For_Statement -> FOR identifier assign Expression DOWNTO Expression DO Program_Line_No_Semi_Colon .)
+    ELSE            reduce using rule 75 (For_Statement -> FOR identifier assign Expression DOWNTO Expression DO Program_Line_No_Semi_Colon .)
+
+
+state 159
+
+    (11) Type -> ARRAY [ number dotdot number ] OF . Type
+    (8) Type -> . INTEGER
+    (9) Type -> . STRING
+    (10) Type -> . BOOLEAN
+    (11) Type -> . ARRAY [ number dotdot number ] OF Type
+
+    INTEGER         shift and go to state 67
+    STRING          shift and go to state 68
+    BOOLEAN         shift and go to state 69
+    ARRAY           shift and go to state 70
+
+    Type                           shift and go to state 160
+
+state 160
+
+    (11) Type -> ARRAY [ number dotdot number ] OF Type .
+
+    ;               reduce using rule 11 (Type -> ARRAY [ number dotdot number ] OF Type .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for identifier in state 6 resolved as shift
+WARNING: shift/reduce conflict for WRITELN in state 8 resolved as shift
+WARNING: shift/reduce conflict for WRITE in state 8 resolved as shift
+WARNING: shift/reduce conflict for READ in state 8 resolved as shift
+WARNING: shift/reduce conflict for READLN in state 8 resolved as shift
+WARNING: shift/reduce conflict for identifier in state 8 resolved as shift
+WARNING: shift/reduce conflict for BEGIN in state 8 resolved as shift
+WARNING: shift/reduce conflict for FOR in state 8 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 8 resolved as shift
+WARNING: shift/reduce conflict for IF in state 8 resolved as shift
+WARNING: shift/reduce conflict for WRITELN in state 13 resolved as shift
+WARNING: shift/reduce conflict for WRITE in state 13 resolved as shift
+WARNING: shift/reduce conflict for READ in state 13 resolved as shift
+WARNING: shift/reduce conflict for READLN in state 13 resolved as shift
+WARNING: shift/reduce conflict for identifier in state 13 resolved as shift
+WARNING: shift/reduce conflict for BEGIN in state 13 resolved as shift
+WARNING: shift/reduce conflict for FOR in state 13 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 13 resolved as shift
+WARNING: shift/reduce conflict for IF in state 13 resolved as shift
+WARNING: shift/reduce conflict for + in state 99 resolved as shift
+WARNING: shift/reduce conflict for - in state 99 resolved as shift
+WARNING: shift/reduce conflict for * in state 99 resolved as shift
+WARNING: shift/reduce conflict for / in state 99 resolved as shift
+WARNING: shift/reduce conflict for > in state 99 resolved as shift
+WARNING: shift/reduce conflict for < in state 99 resolved as shift
+WARNING: shift/reduce conflict for = in state 99 resolved as shift
+WARNING: shift/reduce conflict for lowerequal in state 99 resolved as shift
+WARNING: shift/reduce conflict for greaterequal in state 99 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 99 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 99 resolved as shift
+WARNING: shift/reduce conflict for AND in state 99 resolved as shift
+WARNING: shift/reduce conflict for OR in state 99 resolved as shift
+WARNING: shift/reduce conflict for + in state 122 resolved as shift
+WARNING: shift/reduce conflict for - in state 122 resolved as shift
+WARNING: shift/reduce conflict for * in state 122 resolved as shift
+WARNING: shift/reduce conflict for / in state 122 resolved as shift
+WARNING: shift/reduce conflict for > in state 122 resolved as shift
+WARNING: shift/reduce conflict for < in state 122 resolved as shift
+WARNING: shift/reduce conflict for = in state 122 resolved as shift
+WARNING: shift/reduce conflict for lowerequal in state 122 resolved as shift
+WARNING: shift/reduce conflict for greaterequal in state 122 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 122 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 122 resolved as shift
+WARNING: shift/reduce conflict for AND in state 122 resolved as shift
+WARNING: shift/reduce conflict for OR in state 122 resolved as shift
+WARNING: shift/reduce conflict for + in state 123 resolved as shift
+WARNING: shift/reduce conflict for - in state 123 resolved as shift
+WARNING: shift/reduce conflict for * in state 123 resolved as shift
+WARNING: shift/reduce conflict for / in state 123 resolved as shift
+WARNING: shift/reduce conflict for > in state 123 resolved as shift
+WARNING: shift/reduce conflict for < in state 123 resolved as shift
+WARNING: shift/reduce conflict for = in state 123 resolved as shift
+WARNING: shift/reduce conflict for lowerequal in state 123 resolved as shift
+WARNING: shift/reduce conflict for greaterequal in state 123 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 123 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 123 resolved as shift
+WARNING: shift/reduce conflict for AND in state 123 resolved as shift
+WARNING: shift/reduce conflict for OR in state 123 resolved as shift
+WARNING: shift/reduce conflict for + in state 124 resolved as shift
+WARNING: shift/reduce conflict for - in state 124 resolved as shift
+WARNING: shift/reduce conflict for * in state 124 resolved as shift
+WARNING: shift/reduce conflict for / in state 124 resolved as shift
+WARNING: shift/reduce conflict for > in state 124 resolved as shift
+WARNING: shift/reduce conflict for < in state 124 resolved as shift
+WARNING: shift/reduce conflict for = in state 124 resolved as shift
+WARNING: shift/reduce conflict for lowerequal in state 124 resolved as shift
+WARNING: shift/reduce conflict for greaterequal in state 124 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 124 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 124 resolved as shift
+WARNING: shift/reduce conflict for AND in state 124 resolved as shift
+WARNING: shift/reduce conflict for OR in state 124 resolved as shift
+WARNING: shift/reduce conflict for + in state 125 resolved as shift
+WARNING: shift/reduce conflict for - in state 125 resolved as shift
+WARNING: shift/reduce conflict for * in state 125 resolved as shift
+WARNING: shift/reduce conflict for / in state 125 resolved as shift
+WARNING: shift/reduce conflict for > in state 125 resolved as shift
+WARNING: shift/reduce conflict for < in state 125 resolved as shift
+WARNING: shift/reduce conflict for = in state 125 resolved as shift
+WARNING: shift/reduce conflict for lowerequal in state 125 resolved as shift
+WARNING: shift/reduce conflict for greaterequal in state 125 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 125 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 125 resolved as shift
+WARNING: shift/reduce conflict for AND in state 125 resolved as shift
+WARNING: shift/reduce conflict for OR in state 125 resolved as shift
+WARNING: shift/reduce conflict for + in state 126 resolved as shift
+WARNING: shift/reduce conflict for - in state 126 resolved as shift
+WARNING: shift/reduce conflict for * in state 126 resolved as shift
+WARNING: shift/reduce conflict for / in state 126 resolved as shift
+WARNING: shift/reduce conflict for > in state 126 resolved as shift
+WARNING: shift/reduce conflict for < in state 126 resolved as shift
+WARNING: shift/reduce conflict for = in state 126 resolved as shift
+WARNING: shift/reduce conflict for lowerequal in state 126 resolved as shift
+WARNING: shift/reduce conflict for greaterequal in state 126 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 126 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 126 resolved as shift
+WARNING: shift/reduce conflict for AND in state 126 resolved as shift
+WARNING: shift/reduce conflict for OR in state 126 resolved as shift
+WARNING: shift/reduce conflict for + in state 127 resolved as shift
+WARNING: shift/reduce conflict for - in state 127 resolved as shift
+WARNING: shift/reduce conflict for * in state 127 resolved as shift
+WARNING: shift/reduce conflict for / in state 127 resolved as shift
+WARNING: shift/reduce conflict for > in state 127 resolved as shift
+WARNING: shift/reduce conflict for < in state 127 resolved as shift
+WARNING: shift/reduce conflict for = in state 127 resolved as shift
+WARNING: shift/reduce conflict for lowerequal in state 127 resolved as shift
+WARNING: shift/reduce conflict for greaterequal in state 127 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 127 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 127 resolved as shift
+WARNING: shift/reduce conflict for AND in state 127 resolved as shift
+WARNING: shift/reduce conflict for OR in state 127 resolved as shift
+WARNING: shift/reduce conflict for + in state 128 resolved as shift
+WARNING: shift/reduce conflict for - in state 128 resolved as shift
+WARNING: shift/reduce conflict for * in state 128 resolved as shift
+WARNING: shift/reduce conflict for / in state 128 resolved as shift
+WARNING: shift/reduce conflict for > in state 128 resolved as shift
+WARNING: shift/reduce conflict for < in state 128 resolved as shift
+WARNING: shift/reduce conflict for = in state 128 resolved as shift
+WARNING: shift/reduce conflict for lowerequal in state 128 resolved as shift
+WARNING: shift/reduce conflict for greaterequal in state 128 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 128 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 128 resolved as shift
+WARNING: shift/reduce conflict for AND in state 128 resolved as shift
+WARNING: shift/reduce conflict for OR in state 128 resolved as shift
+WARNING: shift/reduce conflict for + in state 129 resolved as shift
+WARNING: shift/reduce conflict for - in state 129 resolved as shift
+WARNING: shift/reduce conflict for * in state 129 resolved as shift
+WARNING: shift/reduce conflict for / in state 129 resolved as shift
+WARNING: shift/reduce conflict for > in state 129 resolved as shift
+WARNING: shift/reduce conflict for < in state 129 resolved as shift
+WARNING: shift/reduce conflict for = in state 129 resolved as shift
+WARNING: shift/reduce conflict for lowerequal in state 129 resolved as shift
+WARNING: shift/reduce conflict for greaterequal in state 129 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 129 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 129 resolved as shift
+WARNING: shift/reduce conflict for AND in state 129 resolved as shift
+WARNING: shift/reduce conflict for OR in state 129 resolved as shift
+WARNING: shift/reduce conflict for + in state 130 resolved as shift
+WARNING: shift/reduce conflict for - in state 130 resolved as shift
+WARNING: shift/reduce conflict for * in state 130 resolved as shift
+WARNING: shift/reduce conflict for / in state 130 resolved as shift
+WARNING: shift/reduce conflict for > in state 130 resolved as shift
+WARNING: shift/reduce conflict for < in state 130 resolved as shift
+WARNING: shift/reduce conflict for = in state 130 resolved as shift
+WARNING: shift/reduce conflict for lowerequal in state 130 resolved as shift
+WARNING: shift/reduce conflict for greaterequal in state 130 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 130 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 130 resolved as shift
+WARNING: shift/reduce conflict for AND in state 130 resolved as shift
+WARNING: shift/reduce conflict for OR in state 130 resolved as shift
+WARNING: shift/reduce conflict for + in state 131 resolved as shift
+WARNING: shift/reduce conflict for - in state 131 resolved as shift
+WARNING: shift/reduce conflict for * in state 131 resolved as shift
+WARNING: shift/reduce conflict for / in state 131 resolved as shift
+WARNING: shift/reduce conflict for > in state 131 resolved as shift
+WARNING: shift/reduce conflict for < in state 131 resolved as shift
+WARNING: shift/reduce conflict for = in state 131 resolved as shift
+WARNING: shift/reduce conflict for lowerequal in state 131 resolved as shift
+WARNING: shift/reduce conflict for greaterequal in state 131 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 131 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 131 resolved as shift
+WARNING: shift/reduce conflict for AND in state 131 resolved as shift
+WARNING: shift/reduce conflict for OR in state 131 resolved as shift
+WARNING: shift/reduce conflict for + in state 132 resolved as shift
+WARNING: shift/reduce conflict for - in state 132 resolved as shift
+WARNING: shift/reduce conflict for * in state 132 resolved as shift
+WARNING: shift/reduce conflict for / in state 132 resolved as shift
+WARNING: shift/reduce conflict for > in state 132 resolved as shift
+WARNING: shift/reduce conflict for < in state 132 resolved as shift
+WARNING: shift/reduce conflict for = in state 132 resolved as shift
+WARNING: shift/reduce conflict for lowerequal in state 132 resolved as shift
+WARNING: shift/reduce conflict for greaterequal in state 132 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 132 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 132 resolved as shift
+WARNING: shift/reduce conflict for AND in state 132 resolved as shift
+WARNING: shift/reduce conflict for OR in state 132 resolved as shift
+WARNING: shift/reduce conflict for + in state 133 resolved as shift
+WARNING: shift/reduce conflict for - in state 133 resolved as shift
+WARNING: shift/reduce conflict for * in state 133 resolved as shift
+WARNING: shift/reduce conflict for / in state 133 resolved as shift
+WARNING: shift/reduce conflict for > in state 133 resolved as shift
+WARNING: shift/reduce conflict for < in state 133 resolved as shift
+WARNING: shift/reduce conflict for = in state 133 resolved as shift
+WARNING: shift/reduce conflict for lowerequal in state 133 resolved as shift
+WARNING: shift/reduce conflict for greaterequal in state 133 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 133 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 133 resolved as shift
+WARNING: shift/reduce conflict for AND in state 133 resolved as shift
+WARNING: shift/reduce conflict for OR in state 133 resolved as shift
+WARNING: shift/reduce conflict for + in state 134 resolved as shift
+WARNING: shift/reduce conflict for - in state 134 resolved as shift
+WARNING: shift/reduce conflict for * in state 134 resolved as shift
+WARNING: shift/reduce conflict for / in state 134 resolved as shift
+WARNING: shift/reduce conflict for > in state 134 resolved as shift
+WARNING: shift/reduce conflict for < in state 134 resolved as shift
+WARNING: shift/reduce conflict for = in state 134 resolved as shift
+WARNING: shift/reduce conflict for lowerequal in state 134 resolved as shift
+WARNING: shift/reduce conflict for greaterequal in state 134 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 134 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 134 resolved as shift
+WARNING: shift/reduce conflict for AND in state 134 resolved as shift
+WARNING: shift/reduce conflict for OR in state 134 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 138 resolved as shift
